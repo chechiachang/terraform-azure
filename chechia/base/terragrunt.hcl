@@ -13,19 +13,19 @@ remote_state {
 
   config = {
     key = "${path_relative_to_include()}/terraform.tfstate"
-    resource_group_name = "${local.environment}"
-    storage_account_name = "${local.storage_account_name}"
-    container_name = "${local.storage_container_name}"
+    resource_group_name = local.environment
+    storage_account_name = local.storage_account_name
+    container_name = local.storage_container_name
   }
 }
 
 # inputs to manage foundation module
 inputs = {
-  environment = "${local.environment}"
-  location = "${local.location}"
-  resource_group_name = "${local.environment}"
-  storage_account_name = "${local.storage_account_name}"
-  storage_container_name = "${local.storage_container_name}"
+  environment = local.environment
+  location = local.location
+  resource_group_name = local.environment
+  storage_account_name = local.storage_account_name
+  storage_container_name = local.storage_container_name
 }
 
 terraform {
