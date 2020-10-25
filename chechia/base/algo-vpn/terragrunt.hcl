@@ -9,4 +9,5 @@ include {
 inputs = {
   virtual_machine_name = "algo-vpn"
   subnet_id = "/subscriptions/${get_env("SUBSCRIPTION_ID")}/resourceGroups/base/providers/Microsoft.Network/virtualNetworks/base-network/subnets/general-purpose"
+  vm_size = "Standard_B1ls" # $0.1984/hr
 }

@@ -26,7 +26,8 @@ variable "private_ip_address_allocation" {
 
 variable "vm_size" {
   type    = string
-  default = "Standard_DS1_v2"
+  #default = "Standard_DS1_v2" # $2.3713/hr
+  default = "Standard_B1ls"   # $0.1984/hr
 }
 
 variable "username" {
