@@ -24,10 +24,20 @@ variable "private_ip_address_allocation" {
   default = "Dynamic"
 }
 
-variable "vm_size" {
+variable "use_public_ip" {
+  type    = bool
+  default = false
+}
+
+variable "public_ip_address_allocation" {
   type    = string
+  default = "Dynamic" # "Static
+}
+
+variable "vm_size" {
+  type = string
   #default = "Standard_DS1_v2" # $2.3713/hr
-  default = "Standard_B1ls"   # $0.1984/hr
+  default = "Standard_B1ls" # $0.1984/hr
 }
 
 variable "username" {
