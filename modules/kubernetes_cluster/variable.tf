@@ -31,3 +31,10 @@ variable "spot_node_pools" {
   type    = map
   default = {}
 }
+
+# Cluster::log
+
+variable "log_analytics_workspace_sku" {
+  type = string
+  default = "PerGB2018"
+}
