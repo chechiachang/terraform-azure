@@ -31,3 +31,6 @@ override.tf.json
 # Terragrunt
 
 **/.terragrunt-cache/*
+
+# asdf
+**/.tool-versions
