@@ -77,7 +77,7 @@ resource "azurerm_kubernetes_cluster" "main" {
 
   default_node_pool {
     name       = "default"
-    node_count = 1
+    node_count = var.default_node_pool_count
     vm_size    = var.default_node_pool_vm_size
     # availability_zones = []
 
