@@ -20,11 +20,19 @@ variable "kubernetes_cluster_name" {
 
 variable "default_node_pool_vm_size" {
   type    = string
-  default = "Standard_D1ls"
+  default = "Standard_D2_v2" # 2 cpu 8Gi memory
 }
+
+variable "default_node_pool_count" {
+  type    = number
+  default = 1
+}
+
+# Cluster::node_pool
 
 variable "node_pools" {
   type = map
+  default = {}
 }
 
 variable "spot_node_pools" {
