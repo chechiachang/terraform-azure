@@ -1,10 +1,75 @@
-# terraform-azure
+Terraform for Azure Cloud
+===
 
-tree
+Manage my azure resources with terraform
 
-chechia
-[env] managed by different foundations (resource group, storage account, storage container)
-base 
+# Usage
 
-modules
+```
+NEW_PROJECT_NAME=my-awesome-azure
 
+cp -r chechia ${NEW_PROJECT_NAME}
+# cd to base/dev/staging/prod environment
+cd ${NEW_PROJECT_NAME}/base/foundation
+```
+
+Edit environments
+- resource group name
+- storage account name
+- storage container name
+```
+vim env.tfvars
+
+az login
+terragrunt init && terragrunt plan
+```
+
+---
+
+# First time? Let's Get-Started!
+
+### Install tools
+
+- azure-cli
+- terraform
+- terragrunt
+
+### config Azure cli
+
+[Azure doc: get started with azure cli](https://docs.microsoft.com/en-us/cli/azure/get-started-with-azure-cli?WT.mc_id=AZ-MVP-5003985)
+
+This project use credential from azure-cli.
+```
+az login
+```
+
+### Create resource group, storage account, and storage blob container
+
+[Azure doc: create storage account](https://docs.microsoft.com/en-us/azure/storage/common/storage-account-create?WT.mc_id=AZ-MVP-5003985&tabs=azure-cli#create-a-storage-account-1)
+
+[Azure doc: Configure storage account](https://docs.microsoft.com/en-us/azure/developer/terraform/store-state-in-azure-storage?WT.mc_id=AZ-MVP-5003985#configure-storage-account)
+
+```
+RESOURCE_GROUP_NAME=base
+LOCATION=southeastasia
+
+az group create \
+  --name ${RESOURCE_GROUP_NAME} \
+  --location ${LOCATION}
+
+STORAGE_ACCOUNT_NAME=base
+
+az storage account create \
+  --name ${STORAGE_ACCOUNT_NAME} \
+  --resource-group ${RESOURCE_GROUP_NAME} \
+  --location ${LOCATION} \
+  --sku Standard_LRS \
+  --kind StorageV2
+
+CONTAINER_NAME=base
+
+az storage container create \
+    --account-name ${STORAGE_ACCOUNT_NAME} \
+    --name ${CONTAINER_NAME} \
+    --auth-mode login
+```
