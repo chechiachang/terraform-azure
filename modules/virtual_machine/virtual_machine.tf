@@ -12,10 +12,10 @@ resource "azurerm_virtual_machine" "main" {
   # delete_data_disks_on_termination = true
 
   storage_image_reference {
-    publisher = "Canonical"
-    offer     = "UbuntuServer"
-    sku       = "18.04-LTS"
-    version   = "latest"
+    publisher = var.storage_image_publisher
+    offer     = var.storage_image_offer
+    sku       = var.storage_image_sku
+    version   = var.storage_image_version
   }
 
   storage_os_disk {

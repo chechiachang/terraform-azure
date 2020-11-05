@@ -31,7 +31,7 @@ variable "default_node_pool_count" {
 # Cluster::node_pool
 
 variable "node_pools" {
-  type = map
+  type    = map
   default = {}
 }
 
@@ -43,6 +43,6 @@ variable "spot_node_pools" {
 # Cluster::log
 
 variable "log_analytics_workspace_sku" {
-  type = string
+  type    = string
   default = "PerGB2018"
 }
