@@ -1,7 +1,7 @@
 Terraform for Azure Cloud
 ===
 
-Manage my azure resources with terraform
+This repository manage my azure resources with terraform and terragrunt. For user not using terragrunt, check our [archived version terraform-azure](archived/azure/README.md)
 
 # Usage
 
@@ -30,9 +30,9 @@ terragrunt init && terragrunt plan
 
 ### Install tools
 
-- azure-cli
-- terraform
-- terragrunt
+- Azure-cli [Azure doc: Install azure-cli](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli?WT.mc_id=AZ-MVP-5003985)
+- Terraform [Azure doc: configure terraform using azure cloud shell](https://docs.microsoft.com/en-us/azure/developer/terraform/get-started-cloud-shell?WT.mc_id=AZ-MVP-5003985)
+- Terragrunt [Github: terragrunt](https://github.com/gruntwork-io/terragrunt)
 
 ### config Azure cli
 
