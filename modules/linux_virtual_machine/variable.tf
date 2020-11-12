@@ -1,3 +1,7 @@
+variable "subscription_id" {
+  type = string
+}
+
 variable "resource_group_name" {
   type = string
 }
@@ -14,9 +18,14 @@ variable "virtual_machine_name" {
   type = string
 }
 
-# az network vnet list
-variable "subnet_id" {
-  type = string
+variable "network" {
+  type        = string
+  description = "Name of network"
+}
+
+variable "subnet" {
+  type        = string
+  description = "Name of subnet"
 }
 
 variable "private_ip_address_allocation" {
@@ -34,30 +43,44 @@ variable "public_ip_address_allocation" {
   default = "Dynamic" # "Static
 }
 
-variable "vm_size" {
+variable "size" {
   type = string
   #default = "Standard_DS1_v2" # $2.3713/hr
   default = "Standard_B1ls" # $0.1984/hr
 }
 
-# Storage image
+variable "priority" {
+  type        = string
+  default     = "Regular"
+  description = "Regular / Spot"
+}
 
-variable "storage_image_publisher" {
+# Spot
+
+variable "max_bid_price" {
+  type        = number
+  default     = null
+  description = "Required only if priotity is Spot"
+}
+
+# Source image
+
+variable "source_image_publisher" {
   type    = string
   default = "Canonical"
 }
 
-variable "storage_image_offer" {
+variable "source_image_offer" {
   type    = string
   default = "UbuntuServer"
 }
 
-variable "storage_image_sku" {
+variable "source_image_sku" {
   type    = string
   default = "18.04-LTS"
 }
 
-variable "storage_image_version" {
+variable "source_image_version" {
   type    = string
   default = "latest"
 }

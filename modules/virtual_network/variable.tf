@@ -10,6 +10,11 @@ variable "environment" {
   type = string
 }
 
+variable "name" {
+  type    = string
+  default = ""
+}
+
 variable "virtual_network_space" {
   type = list(string)
 }

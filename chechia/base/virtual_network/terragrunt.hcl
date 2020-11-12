@@ -9,8 +9,8 @@ include {
 inputs = {
   virtual_network_space= ["10.0.0.0/16"]
   subnets = {
-    general-purpose = {
-      name              = "general-purpose"
+    base-external = {
+      name              = "base-external"
       address_prefixes  = ["10.0.2.0/24"]
     }
   }

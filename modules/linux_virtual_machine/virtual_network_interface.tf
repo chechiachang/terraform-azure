@@ -18,7 +18,7 @@ resource "azurerm_network_interface" "main" {
 
   ip_configuration {
     name                          = "${var.virtual_machine_name}-nic"
-    subnet_id                     = var.subnet_id
+    subnet_id                     = "/subscriptions/${var.subscription_id}/resourceGroups/${var.resource_group_name}/providers/Microsoft.Network/virtualNetworks/${var.network}/subnets/${var.subnet}"
     private_ip_address_allocation = var.private_ip_address_allocation
     public_ip_address_id          = var.use_public_ip ? azurerm_public_ip.main[0].id : null
   }

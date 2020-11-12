@@ -1,3 +1,7 @@
+variable "subscription_id" {
+  type = string
+}
+
 variable "resource_group_name" {
   type = string
 }
@@ -14,6 +18,16 @@ variable "environment" {
 
 variable "kubernetes_cluster_name" {
   type = string
+}
+
+variable "network" {
+  type        = string
+  description = "Name of network"
+}
+
+variable "subnet" {
+  type        = string
+  description = "Name of subnet"
 }
 
 # Cluster::default_node_pool
@@ -43,9 +57,9 @@ variable "spot_node_pools" {
 # Cluster::log
 
 variable "log_enabled" {
-  type = bool
+  type        = bool
   description = "Enavle log analytics"
-  default = false
+  default     = false
 }
 
 variable "log_analytics_workspace_sku" {

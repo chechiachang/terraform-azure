@@ -1,5 +1,5 @@
 terraform {
-  source = "../../../modules//virtual_machine"
+  source = "../../../modules//linux_virtual_machine"
 }
 
 include {
@@ -8,7 +8,8 @@ include {
 
 inputs = {
   virtual_machine_name = "algo-vpn"
-  subnet_id = "/subscriptions/${get_env("SUBSCRIPTION_ID")}/resourceGroups/base/providers/Microsoft.Network/virtualNetworks/base-network/subnets/general-purpose"
+  network = "base-network"
+  subnet = "base-external"
   use_public_ip = true
-  vm_size = "Standard_B1ls" # $0.1984/hr
+  size = "Standard_D2_v2"
 }
