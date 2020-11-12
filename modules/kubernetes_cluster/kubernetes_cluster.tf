@@ -12,7 +12,7 @@ resource "azurerm_log_analytics_workspace" "main" {
 }
 
 resource "azurerm_log_analytics_solution" "main" {
-  count = var.log_enabled ? 1 : 0
+  count                 = var.log_enabled ? 1 : 0
   solution_name         = "ContainerInsights"
   location              = azurerm_log_analytics_workspace.main[0].location
   resource_group_name   = var.resource_group_name
@@ -101,7 +101,5 @@ resource "azurerm_kubernetes_cluster" "main" {
     tags = {
       environment = var.environment
     }
-
-    vnet_subnet_id = null
   }
 }
