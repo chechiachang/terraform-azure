@@ -3,6 +3,7 @@ resource "random_id" "log_analytics_workspace_name_suffix" {
 }
 
 resource "azurerm_log_analytics_workspace" "main" {
+  count = var.log_enabled ? 1 : 0
   # The WorkSpace name has to be unique across the whole of azure, not just the current subscription/tenant.
   name                = "${var.kubernetes_cluster_name}-${random_id.log_analytics_workspace_name_suffix.dec}"
   location            = var.location
@@ -11,11 +12,12 @@ resource "azurerm_log_analytics_workspace" "main" {
 }
 
 resource "azurerm_log_analytics_solution" "main" {
+  count = var.log_enabled ? 1 : 0
   solution_name         = "ContainerInsights"
-  location              = azurerm_log_analytics_workspace.main.location
+  location              = azurerm_log_analytics_workspace.main[0].location
   resource_group_name   = var.resource_group_name
-  workspace_resource_id = azurerm_log_analytics_workspace.main.id
-  workspace_name        = azurerm_log_analytics_workspace.main.name
+  workspace_resource_id = azurerm_log_analytics_workspace.main[0].id
+  workspace_name        = azurerm_log_analytics_workspace.main[0].name
 
   plan {
     publisher = "Microsoft"
@@ -67,9 +69,12 @@ resource "azurerm_kubernetes_cluster" "main" {
       enabled = false
     }
 
-    oms_agent {
-      enabled                    = true
-      log_analytics_workspace_id = azurerm_log_analytics_workspace.main.id
+    dynamic "oms_agent" {
+      for_each = var.log_enabled ? list(1) : list(0)
+      content {
+        enabled                    = var.log_enabled
+        log_analytics_workspace_id = var.log_enabled ? azurerm_log_analytics_workspace.main[0].id : null
+      }
     }
   }
 
