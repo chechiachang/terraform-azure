@@ -57,7 +57,7 @@ az group create \
   --name ${RESOURCE_GROUP_NAME} \
   --location ${LOCATION}
 
-STORAGE_ACCOUNT_NAME=base
+STORAGE_ACCOUNT_NAME=""
 
 az storage account create \
   --name ${STORAGE_ACCOUNT_NAME} \

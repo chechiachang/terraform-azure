@@ -22,11 +22,18 @@ contents:
 
 ```
 az group list
-terragrunt import azurerm_resource_group.main /subscriptions/xxx/resourceGroups/base
+
+SUBSCRIPTION_ID=
+RESOURCE_GROUP_NAME=base
+terragrunt import azurerm_resource_group.main /subscriptions/${SUBSCRIPTION_ID}/resourceGroups/${RESOURCE_GROUP_NAME}
 
 az storage account list
-terragrunt import azurerm_storage_account.main /subscriptions/xxx/resourceGroups/base/providers/Microsoft.Storage/storageAccounts/basexxx
 
-az storage container list --account-name basexxx
-terragrunt import azurerm_storage_container.main https://basexxx.blob.core.windows.net/base
+STORAGE_ACCOUNT=
+terragrunt import azurerm_storage_account.main /subscriptions/${SUBSCRIPTION_ID}/resourceGroups/${RESOURCE_GROUP_NAME}/providers/Microsoft.Storage/storageAccounts/${STORAGE_ACCOUNT}
+
+az storage container list --account-name ${STORAGE_ACCOUNT}
+
+CONTAINER_NAME=base
+terragrunt import azurerm_storage_container.main "https://${STORAGE_ACCOUNT}.blob.core.windows.net/${CONTAINER_NAME}"
 ```

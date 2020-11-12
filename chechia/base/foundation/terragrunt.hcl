@@ -9,5 +9,5 @@ include {
 inputs = {
   # terraform backend
   storage_container_name = "base"
-  storage_account_name = "baseec31eee5" # env + (random hex)
+  storage_account_name = "7d65a5b0ed66f589127c6f07"
 }
