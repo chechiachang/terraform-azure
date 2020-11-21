@@ -33,9 +33,9 @@ resource "azurerm_linux_virtual_machine" "main" {
   }
 
   # Spot instance
-  priority        = "Spot"
-  max_bid_price   = 0.06
-  eviction_policy = "Deallocate"
+  priority        = var.priority
+  max_bid_price   = var.priority == "Spot" ? var.max_bid_price : null
+  eviction_policy = var.priority == "Spot" ? "Deallocate" : null
 
   tags = {
     environment = var.environment

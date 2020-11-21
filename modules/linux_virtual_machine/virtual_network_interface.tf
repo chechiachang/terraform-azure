@@ -27,4 +27,3 @@ resource "azurerm_network_interface" "main" {
     azurerm_public_ip.main[0]
   ]
 }
-
