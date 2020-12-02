@@ -27,5 +27,26 @@ inputs = {
       source_port_range                          = "*"
       source_port_ranges                         = []
     }
+    maicoinport22 = {
+      access                                     = "Allow"
+      description                                = ""
+      destination_address_prefix                 = "*"
+      destination_address_prefixes               = []
+      destination_application_security_group_ids = []
+      destination_port_range                     = "22"
+      destination_port_ranges                    = []
+      direction                                  = "Inbound"
+      name                                       = "Maicoin_Port_22"
+      priority                                   = 100
+      protocol                                   = "*"
+      source_address_prefix                      = ""
+      source_address_prefixes                    = [
+        "118.169.75.176",
+        "118.169.87.240"
+      ]
+      source_application_security_group_ids      = []
+      source_port_range                          = "*"
+      source_port_ranges                         = []
+    }
   }
 }
