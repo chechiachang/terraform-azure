@@ -16,23 +16,23 @@ inputs = {
 
   #node_pools = {}
 
-  spot_node_pools = {
-    spot = {
-      name = "spot"
-      vm_size = "Standard_D2_v2"
-      node_count = 1
+  #spot_node_pools = {
+  #  spot = {
+  #    name = "spot"
+  #    vm_size = "Standard_D2_v2"
+  #    node_count = 1
 
-      # Spot
-      priority = "Spot"
-      eviction_policy = "Delete"
-      spot_max_price = -1 # Default on-demand price
+  #    # Spot
+  #    priority = "Spot"
+  #    eviction_policy = "Delete"
+  #    spot_max_price = -1 # Default on-demand price
 
-      node_labels = {
-        "kubernetes.azure.com/scalesetpriority" = "spot"
-      }
-      node_taints = [
-      #  "kubernetes.azure.com/scalesetpriority=spot:NoSchedule"
-      ]
-    }
-  }
+  #    node_labels = {
+  #      "kubernetes.azure.com/scalesetpriority" = "spot"
+  #    }
+  #    node_taints = [
+  #    #  "kubernetes.azure.com/scalesetpriority=spot:NoSchedule"
+  #    ]
+  #  }
+  #}
 }
