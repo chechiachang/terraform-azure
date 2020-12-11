@@ -1,5 +1,5 @@
 resource "azurerm_linux_virtual_machine_scale_set" "main" {
-  name                = var.scale_set_name
+  name                = var.name
   location            = var.location
   resource_group_name = var.resource_group_name
   sku                 = var.sku
@@ -45,6 +45,8 @@ resource "azurerm_linux_virtual_machine_scale_set" "main" {
       name      = "internal"
       primary   = true
       subnet_id = var.subnet
+      load_balancer_backend_address_pool_ids = [azurerm_lb_backend_address_pool.main.id]
+      load_balancer_inbound_nat_rules_ids    = [element(azurerm_lb_nat_pool.main.*.id, count.index)]
     }
   }
 

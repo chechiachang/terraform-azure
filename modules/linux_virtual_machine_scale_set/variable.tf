@@ -14,7 +14,7 @@ variable "environment" {
   type = string
 }
 
-variable "scale_set_name" {
+variable "name" {
   type = string
 }
 
@@ -31,6 +31,7 @@ variable "sku" {
 
 variable "instances" {
   type = number
+  default = 1
 }
 
 variable "priority" {
