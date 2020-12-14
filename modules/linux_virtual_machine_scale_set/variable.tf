@@ -1,7 +1,3 @@
-variable "subscription_id" {
-  type = string
-}
-
 variable "resource_group_name" {
   type = string
 }
@@ -16,11 +12,6 @@ variable "environment" {
 
 variable "name" {
   type = string
-}
-
-variable "subnet" {
-  type        = string
-  description = "Name of subnet"
 }
 
 variable "sku" {
@@ -38,6 +29,22 @@ variable "priority" {
   type        = string
   default     = "Regular"
   description = "Regular / Spot"
+}
+
+# network
+
+variable "subnet" {
+  type        = string
+  description = "Name of subnet"
+}
+
+variable "allowed_ssh_cidr_blocks" {
+  type        = list
+}
+
+variable "api_port" {
+  description = "The port to use for Vault API calls"
+  default     = 8200
 }
 
 # Spot

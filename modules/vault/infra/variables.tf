@@ -9,8 +9,8 @@ variable "resource_group_name" {
 }
 
 variable "location" {
-  description = "The Azure region the consul cluster will be deployed in"
-  default     = "East US"
+  description = "The Azure region will be deployed in"
+  default = "southeastasia"
 }
 
 variable "environment" {
@@ -29,21 +29,29 @@ variable "storage_container_name" {
 
 # network
 
-variable "network" {
-  type        = string
-  description = "Name of network"
-}
+#variable "network" {
+#  type        = string
+#  description = "Name of network"
+#}
 
 variable "subnet" {
   type        = string
   description = "Name of subnet"
 }
 
+variable "allowed_ssh_cidr_blocks" {
+  type        = list
+}
+
+variable "api_port" {
+  description = "The port to use for Vault API calls"
+  default     = 8200
+}
+
 # vault
 
 variable "name" {
   description = "What to name the Vault cluster and all of its associated resources"
-  default     = "vault-example"
 }
 
 variable "instance_size" {

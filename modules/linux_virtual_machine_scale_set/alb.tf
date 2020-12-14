@@ -2,12 +2,12 @@ resource "azurerm_public_ip" "main" {
   name                         = var.name
   location                     = var.location
   resource_group_name          = var.resource_group_name
-  public_ip_address_allocation = "static"
-  domain_name_label            = var.cluster_name
+  allocation_method = "Static"
+  domain_name_label            = var.name
 }
 
 resource "azurerm_lb" "main" {
-  name                = "${var.cluster_name}_access"
+  name                = "${var.name}_access"
   location            = var.location
   resource_group_name = var.resource_group_name
 
