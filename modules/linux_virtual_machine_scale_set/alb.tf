@@ -25,7 +25,7 @@ resource "azurerm_lb_nat_pool" "main" {
   frontend_port_start            = 2200
   frontend_port_end              = 2299
   backend_port                   = 22
-  frontend_ip_configuration_name = "PublicIPAddress"
+  frontend_ip_configuration_name = var.name
 }
 
 resource "azurerm_lb_probe" "main" {
@@ -48,7 +48,7 @@ resource "azurerm_lb_rule" "main" {
   protocol                       = "Tcp"
   frontend_port                  = var.api_port
   backend_port                   = var.api_port
-  frontend_ip_configuration_name = "PublicIPAddress"
+  frontend_ip_configuration_name = var.name
   backend_address_pool_id        = azurerm_lb_backend_address_pool.main.id
   probe_id                       = azurerm_lb_probe.main.id
 }

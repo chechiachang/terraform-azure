@@ -1,3 +1,7 @@
+variable "subscription_id" {
+  type = string
+}
+
 variable "resource_group_name" {
   type = string
 }
@@ -32,6 +36,11 @@ variable "priority" {
 }
 
 # network
+
+variable "network" {
+  type        = string
+  description = "Name of network"
+}
 
 variable "subnet" {
   type        = string

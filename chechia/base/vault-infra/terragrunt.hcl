@@ -9,9 +9,8 @@ include {
 
 inputs = {
   name = "chechia-home-vault"
+  network = "base-network"
   subnet = "base-external"
-  storage_account_name = "7d65a5b0ed66f589127c6f07"
-  storage_container_name = "base"
   allowed_ssh_cidr_blocks = [
   ]
 }

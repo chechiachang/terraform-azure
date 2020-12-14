@@ -17,22 +17,17 @@ variable "environment" {
   type = string
 }
 
-# Storage
-
-variable "storage_account_name" {
-  description = "The name of an Azure Storage Account. This SA should already exist"
-}
-
-variable "storage_container_name" {
-  description = "The name of an Azure Storage container. This should already exist"
-}
-
 # network
 
 #variable "network" {
 #  type        = string
 #  description = "Name of network"
 #}
+
+variable "network" {
+  type        = string
+  description = "Name of network"
+}
 
 variable "subnet" {
   type        = string
