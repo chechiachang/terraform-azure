@@ -7,11 +7,12 @@ include {
 }
 
 inputs = {
-  name                  = "chechia-general"
-  administrator_login   = "chechia"
-  sku_name              = "GP_Gen5_2"
-  storage_mb            = 5120
-  auto_grow_enabled     = false
+  name                    = "chechia-general"
+  administrator_login     = "chechia"
+  sku_name                = "GP_Gen5_2"
+  storage_mb              = 5120
+  auto_grow_enabled       = false
+  ssl_enforcement_enabled = false
 
   databases = {
     vault = {

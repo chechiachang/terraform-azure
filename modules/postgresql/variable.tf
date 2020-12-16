@@ -45,6 +45,11 @@ variable "auto_grow_enabled" {
   default = false
 }
 
+variable "ssl_enforcement_enabled" {
+  type = bool
+  default = true
+}
+
 variable "administrator_login" {
   type = string
 }
