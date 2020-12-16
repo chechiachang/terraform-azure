@@ -25,7 +25,7 @@ variable "sku" {
 }
 
 variable "instances" {
-  type = number
+  type    = number
   default = 1
 }
 
@@ -48,7 +48,7 @@ variable "subnet" {
 }
 
 variable "allowed_ssh_cidr_blocks" {
-  type        = list
+  type = list
 }
 
 variable "api_port" {

@@ -10,7 +10,7 @@ variable "resource_group_name" {
 
 variable "location" {
   description = "The Azure region will be deployed in"
-  default = "southeastasia"
+  default     = "southeastasia"
 }
 
 variable "environment" {
@@ -35,7 +35,7 @@ variable "subnet" {
 }
 
 variable "allowed_ssh_cidr_blocks" {
-  type        = list
+  type = list
 }
 
 variable "api_port" {
