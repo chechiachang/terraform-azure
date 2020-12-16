@@ -9,7 +9,7 @@ include {
 inputs = {
   kubernetes_cluster_name = "general"
   default_node_pool_vm_size = "Standard_D2_v2"
-  default_node_pool_count = 1
+  default_node_pool_count = 3
 
   network = "base-network"
   subnet = "base-external"
