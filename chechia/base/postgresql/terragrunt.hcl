@@ -9,7 +9,7 @@ include {
 inputs = {
   name                  = "chechia-general"
   administrator_login   = "chechia"
-  sku_name              = "B_Gen5_1"
+  sku_name              = "GP_Gen5_2"
   storage_mb            = 5120
   auto_grow_enabled     = false
 
