@@ -6,7 +6,7 @@
 # - a policy
 
 module "kv" {
-  source  = "../secrets-engines/kv"
+  source  = "../secrets_engines/kv"
   enable  = true
   name    = var.approle_role_name
 }
