@@ -3,6 +3,13 @@ Terraform for Azure Cloud
 
 This repository manage my azure resources with terraform and terragrunt. For user not using terragrunt, check our [archived version terraform-azure](archived/azure/README.md)
 
+# Client Version
+
+terraform
+  0.13.5
+terragrunt
+  0.26.0
+
 # Usage
 
 ```

@@ -1,3 +1,3 @@
 module "auth_approle" {
-  source = "./auth-methods/approle"
+  source = "./auth_methods/approle"
 }
