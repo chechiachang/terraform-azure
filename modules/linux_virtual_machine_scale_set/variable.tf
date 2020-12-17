@@ -14,13 +14,8 @@ variable "environment" {
   type = string
 }
 
-variable "scale_set_name" {
+variable "name" {
   type = string
-}
-
-variable "subnet" {
-  type        = string
-  description = "Name of subnet"
 }
 
 variable "sku" {
@@ -30,13 +25,35 @@ variable "sku" {
 }
 
 variable "instances" {
-  type = number
+  type    = number
+  default = 1
 }
 
 variable "priority" {
   type        = string
   default     = "Regular"
   description = "Regular / Spot"
+}
+
+# network
+
+variable "network" {
+  type        = string
+  description = "Name of network"
+}
+
+variable "subnet" {
+  type        = string
+  description = "Name of subnet"
+}
+
+variable "allowed_ssh_cidr_blocks" {
+  type = list
+}
+
+variable "api_port" {
+  description = "The port to use for Vault API calls"
+  default     = 8200
 }
 
 # Spot
