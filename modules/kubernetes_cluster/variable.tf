@@ -30,6 +30,11 @@ variable "subnet" {
   description = "Name of subnet"
 }
 
+variable "kubeconfig_output_path" {
+  type    = string
+  default = "KUBECONFIG"
+}
+
 # Cluster::default_node_pool
 
 variable "default_node_pool_vm_size" {

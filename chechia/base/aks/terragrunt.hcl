@@ -14,6 +14,8 @@ inputs = {
   network = "base-network"
   subnet = "base-external"
 
+  kubeconfig_output_path = "/Users/che-chia/.kube/azure-aks"
+
   #node_pools = {}
 
   #spot_node_pools = {
