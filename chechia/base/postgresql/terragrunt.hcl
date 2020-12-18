@@ -1,6 +1,6 @@
 terraform {
   # source = "../../../modules/postgresql"
-  source = "git::ssh://git@github.com/chechiachang/terraform-azure.git//modules/postgresql?ref=v0.1.2"
+  source = "git::ssh://git@github.com/chechiachang/terraform-azure.git//modules/postgresql?ref=v0.1.3"
 }
 
 include {
@@ -8,12 +8,13 @@ include {
 }
 
 inputs = {
-  name                    = "chechia-general"
-  administrator_login     = "chechia"
-  sku_name                = "GP_Gen5_2"
-  storage_mb              = 5120
-  auto_grow_enabled       = false
-  ssl_enforcement_enabled = false
+  name                              = "chechia-general"
+  administrator_login               = "chechia"
+  sku_name                          = "GP_Gen5_2"
+  storage_mb                        = 5120
+  auto_grow_enabled                 = false
+  ssl_enforcement_enabled           = false
+  ssl_minimal_tls_version_enforced  = "TLSEnforcementDisabled"
 
   databases = {
     vault = {
