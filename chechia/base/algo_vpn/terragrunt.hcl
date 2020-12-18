@@ -1,5 +1,5 @@
 terraform {
-  source = "../../../modules//linux_virtual_machine"
+  source = "../../../modules/linux_virtual_machine"
 }
 
 include {

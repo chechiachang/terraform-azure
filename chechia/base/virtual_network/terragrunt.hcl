@@ -1,5 +1,5 @@
 terraform {
-  source = "../../../modules//virtual_network"
+  source = "../../../modules/virtual_network"
 }
 
 include {

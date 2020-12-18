@@ -1,6 +1,5 @@
 terraform {
-  #source = "git::ssh://git@github.com/chechiachang/terraform-azure.git//modules/vault/infra?ref=v0.1.0"
-  source = "/Users/che-chia/workspace/terraform-azure//modules/vault/infra"
+  source = "git::ssh://git@github.com/chechiachang/terraform-azure.git//modules/vault/config?ref=v0.1.2"
 }
 
 include {
