@@ -1,6 +1,5 @@
 module "scale-set" {
-  #source = "git::ssh://git@github.com/chechiachang/terraform-azure.git/modules//scale_set?ref=v0.1.2"
-  source = "/Users/che-chia/workspace/terraform-azure//modules/linux_virtual_machine_scale_set"
+  source = "git::ssh://git@github.com/chechiachang/terraform-azure.git/modules//scale_set?ref=v0.1.23"
 
   subscription_id         = var.subscription_id
   resource_group_name     = var.resource_group_name
