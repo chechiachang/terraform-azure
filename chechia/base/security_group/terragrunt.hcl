@@ -1,5 +1,6 @@
 terraform {
-  source = "../../../modules/security_group"
+  # source = "../../../modules/security_group"
+  source = "git::ssh://git@github.com/chechiachang/terraform-azure.git//modules/security_group?ref=v0.1.2"
 }
 
 include {

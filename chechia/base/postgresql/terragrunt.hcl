@@ -1,5 +1,6 @@
 terraform {
-  source = "../../../modules/postgresql"
+  # source = "../../../modules/postgresql"
+  source = "git::ssh://git@github.com/chechiachang/terraform-azure.git//modules/postgresql?ref=v0.1.2"
 }
 
 include {

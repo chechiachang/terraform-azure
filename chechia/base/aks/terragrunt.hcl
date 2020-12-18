@@ -1,5 +1,6 @@
 terraform {
-  source = "../../../modules/kubernetes_cluster"
+  # source = "../../../modules/kubernetes_cluster"
+  source = "git::ssh://git@github.com/chechiachang/terraform-azure.git//modules/kubernetes_cluster?ref=v0.1.2"
 }
 
 include {
