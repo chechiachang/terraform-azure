@@ -50,6 +50,11 @@ variable "ssl_enforcement_enabled" {
   default = true
 }
 
+variable "ssl_minimal_tls_version_enforced" {
+  type = string
+  default = "TLS1_2"
+}
+
 variable "administrator_login" {
   type = string
 }
