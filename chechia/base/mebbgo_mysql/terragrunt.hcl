@@ -12,7 +12,7 @@ locals {
 }
 
 inputs = {
-  name                              = "chechia-general"
+  name                              = "mebbgo"
   administrator_login               = "chechia"
   sku_name                          = "B_Gen5_1"
   storage_mb                        = 5120
@@ -25,11 +25,11 @@ inputs = {
       name = "bbgo"
     }
   }
-  virtual_network_rules = {
-    allow-base-external = {
-      name = "allow-base-external"
-      network = "base-network"
-      subnet = "base-external"
-    }
-  }
+  #virtual_network_rules = {
+  #  allow-base-external = {
+  #    name = "allow-base-external"
+  #    network = "base-network"
+  #    subnet = "base-external"
+  #  }
+  #}
 }

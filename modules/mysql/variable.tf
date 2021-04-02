@@ -63,9 +63,9 @@ variable "administrator_login" {
 
 variable "virtual_network_rules" {
   type    = map(object({
-    name = string
+    name    = string
     network = string
-    subnet = string
+    subnet  = string
   }))
   default = {}
 }
