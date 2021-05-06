@@ -1,5 +1,5 @@
 variable "subscription_id" {
-  type = string
+ type = string
 }
 
 variable "resource_group_name" {
@@ -94,3 +94,14 @@ variable "ssh_key_file_path" {
   type    = string
   default = "~/.ssh/id_rsa.pub"
 }
+
+variable "data_disks" {
+  type    = list(object({
+    name = string
+    size = number
+    storage_account_type = string
+  }))
+  default = []
+}
+
+
