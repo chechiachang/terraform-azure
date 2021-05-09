@@ -12,7 +12,7 @@ inputs = {
   network = "base-network"
   subnet = "base-external"
   use_public_ip = true
-  size = "Standard_D2_v4"
+  size = "Standard_D2s_v4"
   #priority = "Spot"
   network_security_group_id = "chechia-home"
 
@@ -23,14 +23,15 @@ inputs = {
   # https://github.com/Chia-Network/chia-blockchain/wiki/k-sizes#storage-requirements
   data_disks = [
     {
-      name                 = "k34-tmp"
-      size                 = 2000   # >288.8 GB
-      storage_account_type = "StandardSSD_LRS"
-    },
-    {
-      name                 = "k34"
+      name                 = "k32"
       size                 = 2000   # >108.9 GB
       storage_account_type = "Standard_LRS"
-    }
+    },
   ]
+  tmp_disks = {
+    name                 = "tmp"
+    number               = 3
+    size                 = 128
+    storage_account_type = "Premium_LRS"
+  }
 }

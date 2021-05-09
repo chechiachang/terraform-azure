@@ -95,6 +95,8 @@ variable "ssh_key_file_path" {
   default = "~/.ssh/id_rsa.pub"
 }
 
+# disk
+
 variable "data_disks" {
   type    = list(object({
     name = string
@@ -102,6 +104,21 @@ variable "data_disks" {
     storage_account_type = string
   }))
   default = []
+}
+
+variable "tmp_disks" {
+  type    = object({
+    name                 = string
+    number               = number
+    size                 = number
+    storage_account_type = string
+  })
+  default = {
+    name                 = "tmp"
+    number               = 0
+    size                 = 4
+    storage_account_type = "Premium_LRS"
+  }
 }
 
 
