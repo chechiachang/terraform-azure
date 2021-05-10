@@ -37,14 +37,9 @@ variable "priority" {
 
 # network
 
-variable "load_balancer_backend_address_pool_ids" {
-  type        = list(string)
-  default     = []
-}
-
-variable "load_balancer_inbound_nat_rules_ids" {
-  type        = list(string)
-  default     = []
+variable "enable_alb" {
+  type    = bool
+  default = false
 }
 
 variable "network" {

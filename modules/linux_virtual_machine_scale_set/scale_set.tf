@@ -45,8 +45,9 @@ resource "azurerm_linux_virtual_machine_scale_set" "main" {
       name                                   = "internal"
       primary                                = true
       subnet_id                              = "/subscriptions/${var.subscription_id}/resourceGroups/${var.resource_group_name}/providers/Microsoft.Network/virtualNetworks/${var.network}/subnets/${var.subnet}"
-      load_balancer_backend_address_pool_ids = [azurerm_lb_backend_address_pool.main.id]
-      load_balancer_inbound_nat_rules_ids    = [azurerm_lb_nat_pool.main.id]
+
+      load_balancer_backend_address_pool_ids = var.load_balancer_backend_address_pool_ids
+      load_balancer_inbound_nat_rules_ids    = var.load_balancer_inbound_nat_rules_ids
     }
   }
 
