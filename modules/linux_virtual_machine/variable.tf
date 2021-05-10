@@ -95,6 +95,13 @@ variable "ssh_key_file_path" {
   default = "~/.ssh/id_rsa.pub"
 }
 
+# Provision
+
+variable "custom_data" {
+  type    = string
+  default = ""
+}
+
 # disk
 
 variable "data_disks" {

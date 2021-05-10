@@ -108,6 +108,13 @@ variable "data_disks" {
   default = []
 }
 
+# Provision
+
+variable "custom_data" {
+  type    = string
+  default = ""
+}
+
 # SSH
 
 variable "username" {
@@ -118,4 +125,14 @@ variable "username" {
 variable "ssh_key_file_path" {
   type    = string
   default = "~/.ssh/id_rsa.pub"
+}
+
+# chia
+
+variable "storage_account_name" {
+  type    = string
+}
+
+variable "storage_container_name" {
+  type    = string
 }

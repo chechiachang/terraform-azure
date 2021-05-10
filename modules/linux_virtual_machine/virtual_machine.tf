@@ -37,6 +37,8 @@ resource "azurerm_linux_virtual_machine" "main" {
   max_bid_price   = var.priority == "Spot" ? var.max_bid_price : null
   eviction_policy = var.priority == "Spot" ? "Deallocate" : null
 
+  custom_data = base64encode(var.custom_data)
+
   tags = {
     environment = var.environment
   }
