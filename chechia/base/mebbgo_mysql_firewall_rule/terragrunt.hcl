@@ -12,7 +12,7 @@ dependency "mysql" {
 }
 
 dependency "vm" {
-  config_path = "../mebbgo_bh"
+  config_path = "../mebbgo"
 }
 
 locals {

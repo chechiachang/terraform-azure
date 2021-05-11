@@ -1,6 +1,6 @@
 terraform {
-  # source = "../../../modules/linux_virtual_machine"
-  source = "git::ssh://git@github.com/chechiachang/terraform-azure.git//modules/linux_virtual_machine?ref=v0.1.2"
+  source = "../../../modules/linux_virtual_machine"
+  #source = "git::ssh://git@github.com/chechiachang/terraform-azure.git//modules/linux_virtual_machine?ref=v0.1.2"
 }
 
 include {

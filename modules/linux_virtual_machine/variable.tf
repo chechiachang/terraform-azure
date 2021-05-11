@@ -99,7 +99,7 @@ variable "ssh_key_file_path" {
 
 variable "custom_data" {
   type    = string
-  default = ""
+  default = "echo"
 }
 
 # disk
