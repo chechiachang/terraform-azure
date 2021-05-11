@@ -11,7 +11,7 @@ inputs = {
   name = "chia"
 
   sku       = "Standard_L8s_v2"
-  instances = 0
+  instances = 1
 
   network = "base-network"
   subnet = "base-external"
@@ -36,6 +36,10 @@ inputs = {
   #    storage_account_type = "Standard_LRS"
   #  },
   #]
+
+  cloudconfig_file = "../../templates/cloud_config/l8sv2.yaml"
+
+  # Chia
 
   storage_account_name = "7d65a5b0ed66f589127c6f07"
   storage_container_name = "chia"

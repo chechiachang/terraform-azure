@@ -77,7 +77,7 @@ nohup chia plots create \
   -k 32 \
   -n ${PLOT_NUMBER} \
   -t /chia/tmp \
-  -d /chia/k32 \
+  -d /chia/final \
   -r ${THREAD} \
   -b ${MEMORY} > k32.log 2>&1 &
 ```

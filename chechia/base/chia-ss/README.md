@@ -12,6 +12,13 @@ spot max price = $0.15708 / hr = $114 /month
 
 scale 10 instances
 
+```
+Device             tps    MB_read/s    MB_wrtn/s    MB_dscd/s    MB_read    MB_wrtn    MB_dscd
+nvme0n1          65.43         2.81        50.99       698.16       7370     133768    1831419
+sda              11.82         0.14         0.77         0.14        359       2032        361
+sdb               0.26         0.01         0.00         0.00         26          0          0
+```
+
 # VM with tmp SSD
 
 L4s

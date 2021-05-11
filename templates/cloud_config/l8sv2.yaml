@@ -1,0 +1,50 @@
+#cloud-config
+# https://cloudinit.readthedocs.io/en/latest/topics/examples.html
+package_upgrade: true
+packages:
+  - curl
+  - git
+
+disk_setup:
+  /dev/nvme0n1:
+    table_type: 'gpt'
+    layout: True
+    overwrite: True
+
+fs_setup:
+  - device: /dev/nvme0n1
+    label: None,
+    filesystem: ext4
+    partition: auto
+
+mounts:
+ - [ /dev/nvme0n1p1, /chia/tmp, auto, "defaults,noexec" ]
+ - [ /dev/sdb1, /mnt, auto, "defaults,noexec" ]
+
+write_files:
+  - path: /home/chechia/fuse_connection.cfg
+    owner: chechia:chechia
+    content: |
+      accountName ${account_name}
+      accountKey ${account_key}
+      containerName ${container_name}
+
+runcmd:
+  - curl -sSL https://packages.microsoft.com/keys/microsoft.asc | sudo apt-key add -
+  - sudo apt-add-repository https://packages.microsoft.com/ubuntu/20.04/prod
+  - sudo apt-get update
+  - sudo apt-get install -y blobfuse
+  - sudo mkdir -p /chia/final /mnt/resource/blobfusetmp
+  - >
+    sudo blobfuse /chia/final --tmp-path=/mnt/resource/blobfusetmp \
+    --config-file=/home/chechia/fuse_connection.cfg \
+    -o allow_other \
+    -o attr_timeout=240 \
+    -o entry_timeout=240 \
+    -o negative_timeout=120
+  - sudo chown chechia:chechia /chia/final
+  - sudo chown chechia:chechia /chia/tmp
+  - sudo chown chechia:chechia /mnt/resource/blobfusetmp
+  - git clone https://github.com/Chia-Network/chia-blockchain.git -b latest --recurse-submodules /home/chechia/chia-blockchain
+  - cd /home/chechia/chia-blockchain; sudo su chechia -c "sh install.sh"
+  # Start farmer

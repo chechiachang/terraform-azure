@@ -25,6 +25,7 @@ locals {
   echo "accountKey ${data.azurerm_storage_account.main.primary_access_key}" | tee -a /home/chechia/fuse_connection.cfg
   echo "containerName ${var.storage_container_name}" | tee -a /home/chechia/fuse_connection.cfg
   chmod 600 fuse_connection.cfg
+
   mkdir -p /chia/final
   sudo blobfuse /chia/final \
     --tmp-path=/mnt/resource/blobfusetmp \
@@ -37,6 +38,8 @@ locals {
   git clone https://github.com/Chia-Network/chia-blockchain.git -b latest --recurse-submodules \
     && cd chia-blockchain \
     && sh install.sh
+
+  # Start farmer
   EOL
 }
 
@@ -93,7 +96,8 @@ resource "azurerm_linux_virtual_machine_scale_set" "main" {
     }
   }
 
-  custom_data = base64encode(local.custom_data)
+  #custom_data = base64encode(local.custom_data)
+  custom_data = data.template_cloudinit_config.config.rendered
 
   tags = {
     environment = var.environment

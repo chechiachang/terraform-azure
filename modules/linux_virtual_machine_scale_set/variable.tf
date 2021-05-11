@@ -110,9 +110,9 @@ variable "data_disks" {
 
 # Provision
 
-variable "custom_data" {
+variable "cloudconfig_file" {
   type    = string
-  default = ""
+  default = "modules/linux_virtual_machine_scale_set/l8sv2.yaml"
 }
 
 # SSH
