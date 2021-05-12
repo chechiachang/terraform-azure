@@ -23,7 +23,7 @@ inputs = {
   name = "chia"
 
   sku       = "Standard_L8s_v2"
-  instances = 1
+  instances = 30
 
   network = dependency.virtual_network.outputs.virtual_network_name
   subnet = "base-external"
