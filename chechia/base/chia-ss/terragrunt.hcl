@@ -7,13 +7,25 @@ include {
   path = find_in_parent_folders()  
 }
 
+dependency "foundation" {
+  config_path = "../foundation"
+}
+
+dependency "virtual_network" {
+  config_path = "../virtual_network"
+}
+
+dependency "blob" {
+  config_path = "../chia-blob"
+}
+
 inputs = {
   name = "chia"
 
   sku       = "Standard_L8s_v2"
   instances = 1
 
-  network = "base-network"
+  network = dependency.virtual_network.outputs.virtual_network_name
   subnet = "base-external"
 
   priority = "Spot"
@@ -41,6 +53,6 @@ inputs = {
 
   # Chia
 
-  storage_account_name = "7d65a5b0ed66f589127c6f07"
-  storage_container_name = "chia"
+  storage_account_name = dependency.foundation.outputs.storage_account_name
+  storage_container_name = dependency.blob.outputs.storage_container_name
 }

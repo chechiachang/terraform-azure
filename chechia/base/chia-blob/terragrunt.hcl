@@ -7,7 +7,11 @@ include {
   path = find_in_parent_folders()  
 }
 
+dependency "foundation" {
+  config_path = "../foundation"
+}
+
 inputs = {
   name = "chia"
-  storage_account_name = "7d65a5b0ed66f589127c6f07"
+  storage_account_name = dependency.foundation.outputs.storage_account_name
 }
