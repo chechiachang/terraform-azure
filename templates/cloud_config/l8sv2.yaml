@@ -62,6 +62,7 @@ write_files:
       accountName ${account_name}
       accountKey ${account_key}
       containerName ${container_name}
+      #blobEndpoint ${container_fqdn}
 
 runcmd:
   - curl -sSL https://packages.microsoft.com/keys/microsoft.asc | sudo apt-key add -
@@ -69,9 +70,9 @@ runcmd:
   - sudo apt-get update
   - sudo apt-get install -y blobfuse
   - sudo mount /mnt # !?
-  - sudo mkdir -p /chia/final /mnt/resource/blobfusetmp
-  - sudo chown chechia:chechia /home/chechia  /chia/final /chia/tmp /mnt/resource/blobfusetmp
+  - sudo mkdir -p /chia/final /chia/tmp/blob
+  - sudo chown chechia:chechia /home/chechia  /chia/final /chia/tmp /chia/tmp/blob
   - sudo chown chechia:chechia /home/chechia/fuse_connection.cfg # !?
-  - sudo blobfuse /chia/final --tmp-path=/mnt/resource/blobfusetmp --config-file=/home/chechia/fuse_connection.cfg -o allow_other -o attr_timeout=240 -o entry_timeout=240 -o negative_timeout=120
+  - sudo blobfuse /chia/final --tmp-path=/chia/tmp/blob --config-file=/home/chechia/fuse_connection.cfg -o allow_other -o attr_timeout=240 -o entry_timeout=240 -o negative_timeout=120
   - sudo systemctl start chia-clone
   - sudo systemctl start chia-plot

@@ -22,3 +22,16 @@ variable "virtual_network_space" {
 variable "subnets" {
   type = map
 }
+
+# DNS
+
+variable "private_dns_zones" {
+  type = map(object({
+      name = string
+  }))
+  default = {
+    default = {
+      name = "default"
+    }
+  }
+}

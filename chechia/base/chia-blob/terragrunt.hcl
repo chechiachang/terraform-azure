@@ -14,4 +14,7 @@ dependency "foundation" {
 inputs = {
   name = "chia"
   storage_account_name = dependency.foundation.outputs.storage_account_name
+
+  subnet_id = "/subscriptions/6fce7237-7e8e-4053-8e7d-ecf8a7c392ce/resourceGroups/base/providers/Microsoft.Network/virtualNetworks/base-network/subnets/base-external"
+  private_dns_zone_name = "privatelink.blob.core.windows.net"
 }

@@ -30,3 +30,19 @@ variable "blob_source" {
   type        = string
   default     = ""
 }
+
+# Private endpoint
+
+variable "subnet_id" {
+  type        = string
+}
+
+variable "private_dns_zone_name" {
+  type        = string
+  default     = ""
+}
+
+variable "private_dns_zone_id" {
+  type        = string
+  default     = ""
+}

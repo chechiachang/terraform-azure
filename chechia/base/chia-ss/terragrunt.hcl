@@ -55,4 +55,5 @@ inputs = {
 
   storage_account_name = dependency.foundation.outputs.storage_account_name
   storage_container_name = dependency.blob.outputs.storage_container_name
+  storage_container_fqdn = dependency.blob.outputs.storage_account_private_endpoint_fqdn
 }
