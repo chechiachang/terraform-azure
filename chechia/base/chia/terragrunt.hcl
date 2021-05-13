@@ -7,14 +7,25 @@ include {
   path = find_in_parent_folders()  
 }
 
+dependency "foundation" {
+  config_path = "../foundation"
+}
+
+dependency "virtual_network" {
+  config_path = "../virtual_network"
+}
+
+dependency "blob" {
+  config_path = "../chia-blob"
+}
+
 inputs = {
   virtual_machine_name = "chia"
-  network = "base-network"
+  network = dependency.virtual_network.outputs.virtual_network_name
   subnet = "base-external"
-  use_public_ip = true
+  use_public_ip = false
 
-  # size = "Standard_D2s_v4"
-  size = "Standard_L8s_v2"
+  size          = "Standard_L8s_v2"
 
   priority = "Spot"
   max_bid_price = "0.16" # > 0.15708
@@ -25,18 +36,21 @@ inputs = {
   source_image_offer = "0001-com-ubuntu-server-focal"
   source_image_sku = "20_04-lts-gen2"
 
-  # https://github.com/Chia-Network/chia-blockchain/wiki/k-sizes#storage-requirements
+  ssh_key_file_path = "~/.ssh/chia.pub"
+
   #data_disks = [
   #  {
-  #    name                 = "k32"
-  #    size                 = 2000   # >108.9 GB
+  #    name                 = "chia-blob-tmp"
+  #    size                 = 200   # >108.9 GB
   #    storage_account_type = "Standard_LRS"
   #  },
   #]
-  #tmp_disks = {
-  #  name                 = "tmp"
-  #  number               = 3
-  #  size                 = 128
-  #  storage_account_type = "Premium_LRS"
-  #}
+
+  cloudconfig_file = "../../templates/cloud_config/l8sv2-farmer.yaml"
+
+  # Chia
+
+  storage_account_name = dependency.foundation.outputs.storage_account_name
+  storage_container_name = dependency.blob.outputs.storage_container_name
+  storage_container_fqdn = dependency.blob.outputs.storage_account_private_endpoint_fqdn
 }

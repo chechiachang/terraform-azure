@@ -21,7 +21,7 @@ resource "azurerm_linux_virtual_machine" "main" {
   os_disk {
     caching              = "ReadWrite"
     storage_account_type = "Standard_LRS"
-    #disk_size_gb = var.disk_size_gb
+    disk_size_gb         = var.disk_size_gb
     # diff_disk_settings {}
   }
 
@@ -37,7 +37,7 @@ resource "azurerm_linux_virtual_machine" "main" {
   max_bid_price   = var.priority == "Spot" ? var.max_bid_price : null
   eviction_policy = var.priority == "Spot" ? "Deallocate" : null
 
-  custom_data = base64encode(var.custom_data)
+  custom_data = data.template_cloudinit_config.config.rendered
 
   tags = {
     environment = var.environment

@@ -49,6 +49,11 @@ variable "size" {
   default = "Standard_B1ls" # $0.1984/hr
 }
 
+variable "disk_size_gb" {
+  type    = number
+  default = 30
+}
+
 variable "priority" {
   type        = string
   default     = "Regular"
@@ -97,6 +102,11 @@ variable "ssh_key_file_path" {
 
 # Provision
 
+variable "cloudconfig_file" {
+  type    = string
+  default = "../../templates/cloud_config/ds2v4.yaml"
+}
+
 variable "custom_data" {
   type    = string
   default = "echo"
@@ -128,4 +138,17 @@ variable "tmp_disks" {
   }
 }
 
+# chia
 
+variable "storage_account_name" {
+  type    = string
+}
+
+variable "storage_container_name" {
+  type    = string
+}
+
+variable "storage_container_fqdn" {
+  type    = string
+  default = ""
+}

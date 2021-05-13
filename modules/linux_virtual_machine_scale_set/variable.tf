@@ -112,7 +112,7 @@ variable "data_disks" {
 
 variable "cloudconfig_file" {
   type    = string
-  default = "modules/linux_virtual_machine_scale_set/l8sv2.yaml"
+  default = "../../templates/cloud_config/ds2v4.yaml"
 }
 
 # SSH
