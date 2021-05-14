@@ -23,11 +23,11 @@ inputs = {
   virtual_machine_name = "chia"
   network = dependency.virtual_network.outputs.virtual_network_name
   subnet = "base-external"
-  use_public_ip = false
+  use_public_ip = true
 
   size          = "Standard_L8s_v2"
 
-  priority = "Spot"
+  priority = "Regular"
   max_bid_price = "0.16" # > 0.15708
 
   network_security_group_id = "chechia-home"

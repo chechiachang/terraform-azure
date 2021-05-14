@@ -37,14 +37,13 @@ write_files:
       ExecStart = /usr/bin/git clone https://github.com/Chia-Network/chia-blockchain.git -b latest --recurse-submodules /home/chechia/chia-blockchain
       [Install]
       WantedBy = multi-user.target
-  - path: /etc/systemd/system/chia-check.service
+  - path: /etc/systemd/system/chia-init.service
     owner: root:root
     content: |
       [Unit]
       Description = Systemd unit for chia check
-      After = chia-clone.service
       [Service]
-      Type = simple
+      Type = oneshot
       RemainAfterExit = true
       User = chechia
       Group = chechia
@@ -52,7 +51,21 @@ write_files:
       ExecStartPre = /usr/bin/sh install.sh
       ExecStartPre = /home/chechia/chia-blockchain/venv/bin/chia init
       ExecStartPre = /home/chechia/chia-blockchain/venv/bin/chia keys add -f /chia/final/mnemonic
-      ExecStartPre = /home/chechia/chia-blockchain/venv/bin/chia plots add -d /chia/final
+      ExecStart = /home/chechia/chia-blockchain/venv/bin/chia plots add -d /chia/final
+      [Install]
+      WantedBy = multi-user.target
+  - path: /etc/systemd/system/chia-check.service
+    owner: root:root
+    content: |
+      [Unit]
+      Description = Systemd unit for chia farm
+      After = chia-init.service
+      [Service]
+      Type = simple
+      RemainAfterExit = true
+      User = chechia
+      Group = chechia
+      WorkingDirectory=/home/chechia/chia-blockchain
       ExecStart = /home/chechia/chia-blockchain/venv/bin/chia plots check
       [Install]
       WantedBy = multi-user.target
@@ -61,7 +74,7 @@ write_files:
     content: |
       [Unit]
       Description = Systemd unit for chia farm
-      After = chia-check.service
+      After = chia-init.service
       [Service]
       Type = simple
       RemainAfterExit = true
@@ -89,5 +102,6 @@ runcmd:
   - sudo chown chechia:chechia /home/chechia/fuse_connection.cfg # !?
   - sudo blobfuse /chia/final --tmp-path=/chia/tmp/blob --config-file=/home/chechia/fuse_connection.cfg -o allow_other -o attr_timeout=240 -o entry_timeout=240 -o negative_timeout=120
   - sudo systemctl start chia-clone
-  - sudo systemctl start chia-check
+  - sudo systemctl start chia-init
+  #- sudo systemctl start chia-check
   - sudo systemctl start chia-farm
