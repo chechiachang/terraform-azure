@@ -100,7 +100,7 @@ runcmd:
   - sudo mkdir -p /chia/final /chia/tmp/blob
   - sudo chown chechia:chechia /home/chechia  /chia/final /chia/tmp/blob
   - sudo chown chechia:chechia /home/chechia/fuse_connection.cfg # !?
-  - sudo blobfuse /chia/final --tmp-path=/chia/tmp/blob --config-file=/home/chechia/fuse_connection.cfg -o allow_other -o attr_timeout=240 -o entry_timeout=240 -o negative_timeout=120
+  - sudo blobfuse /chia/final --tmp-path=/chia/tmp/blob --config-file=/home/chechia/fuse_connection.cfg --file-cache-timeout-in-seconds=0 --no-symlinks=true -o allow_other -o attr_timeout=20 -o entry_timeout=20 -o negative_timeout=10
   - sudo systemctl start chia-clone
   - sudo systemctl start chia-init
   #- sudo systemctl start chia-check
