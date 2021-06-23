@@ -1,0 +1,122 @@
+#cloud-config
+# https://cloudinit.readthedocs.io/en/latest/topics/examples.html
+package_upgrade: true
+packages:
+  - curl
+  - git
+
+disk_setup:
+  /dev/sdb:
+    table_type: 'gpt'
+    layout: True
+    overwrite: True
+  /dev/sdc:
+    table_type: 'gpt'
+    layout: True
+    overwrite: True
+
+fs_setup:
+  - device: /dev/sdb
+    label: None,
+    filesystem: ext4
+    partition: auto
+  - device: /dev/sdc
+    label: None,
+    filesystem: ext4
+    partition: auto
+
+mounts:
+  - [ /dev/sdb1, /account]
+  - [ /dev/sdc1, /ledger]
+
+write_files:
+  - path: /etc/sysctl.d/20-solana-udp-buffers.conf
+    owner: root:root
+    content: |
+      net.core.rmem_default = 134217728
+      net.core.rmem_max = 134217728
+      net.core.wmem_default = 134217728
+      net.core.wmem_max = 134217728
+  - path: /etc/sysctl.d/20-solana-mmaps.conf
+    owner: root:root
+    content: |
+      vm.max_map_count = 700000
+  - path: /etc/security/limits.d/90-solana-nofiles.conf
+    owner: root:root
+    content: |
+      * - nofile 700000
+  - path: /etc/systemd/system/solana-install.service
+    owner: root:root
+    content: |
+      [Unit]
+      Description = Systemd unit for install solana
+      #After = network.target
+      Before = solana-config.service
+      [Service]
+      Type = oneshot
+      RemainAfterExit = true
+      User = root
+      Group = root
+      WorkingDirectory = /home/chechia
+      ExecStartPre = /sbin/sysctl -p /etc/sysctl.d/20-solana-udp-buffers.conf
+      ExecStartPre = /sbin/sysctl -p /etc/sysctl.d/20-solana-mmaps.conf
+      ExecStartPre = /bin/sed -i 's/#DefaultLimitNOFILE=/DefaultLimitNOFILE=700000/g' /etc/systemd/system.conf
+      ExecStartPre = /bin/systemctl daemon-reload
+      ExecStartPre = /usr/bin/wget https://github.com/solana-labs/solana/releases/download/v1.6.9/solana-release-x86_64-unknown-linux-gnu.tar.bz2
+      ExecStartPre = /bin/tar jxf /home/chechia/solana-release-x86_64-unknown-linux-gnu.tar.bz2
+      ExecStartPre = /bin/mv /home/chechia/solana-release/bin/* /usr/local/bin/
+      ExecStartPre = /bin/mkdir -p /home/chechia/solana
+      ExecStartPre = /bin/chown chechia:chechia /home/chechia/solana
+      ExecStart = /usr/bin/touch /home/chechia/solana/solana-install.done
+  - path: /etc/systemd/system/solana-config.service
+    owner: root:root
+    content: |
+      [Unit]
+      Description = Systemd unit for config solana
+      #After = solana-install.service
+      [Service]
+      Type = oneshot
+      RemainAfterExit = true
+      User = chechia
+      Group = chechia
+      WorkingDirectory = /home/chechia/solana
+      ExecStartPre = /usr/local/bin/solana config set --url http://api.devnet.solana.com
+      ExecStartPre = /usr/local/bin/solana transaction-count
+      ExecStartPre = /usr/local/bin/solana-gossip spy --entrypoint entrypoint.devnet.solana.com:8001
+      ExecStart = /usr/bin/touch /home/chechia/solana/solana-config.done
+      [Install]
+      WantedBy = multi-user.target
+  - path: /etc/systemd/system/solana-validator.service
+    owner: root:root
+    content: |
+      [Unit]
+      Description = Systemd unit for solana validator
+      #After = solana-config.service
+      [Service]
+      Type = simple
+      RemainAfterExit = true
+      User = chechia
+      Group = chechia
+      WorkingDirectory = /home/chechia/solana
+      ExecStart = solana-validator --identity /blob/final/validator-keypair.json --vote-account /blob/final/vote-account-keypair.json --rpc-port 8899 --entrypoint entrypoint.devnet.solana.com:8001 --limit-ledger-size --log /home/chechia/solana/solana-validator.log
+      [Install]
+      WantedBy = multi-user.target
+  - path: /home/chechia/fuse_connection.cfg
+    owner: chechia:chechia
+    content: |
+      accountName ${account_name}
+      accountKey ${account_key}
+      containerName ${container_name}
+
+runcmd:
+  - curl -sSL https://packages.microsoft.com/keys/microsoft.asc | sudo apt-key add -
+  - sudo apt-add-repository https://packages.microsoft.com/ubuntu/20.04/prod
+  - sudo apt-get update
+  - sudo apt-get install -y blobfuse
+  - sudo mkdir -p /blob/tmp /blob/final
+  - sudo chown chechia:chechia /account /ledger
+  - sudo chown chechia:chechia /home/chechia/fuse_connection.cfg # !?
+  - sudo blobfuse /blob/final --tmp-path=/blob/tmp --config-file=/home/chechia/fuse_connection.cfg -o allow_other -o attr_timeout=240 -o entry_timeout=240 -o negative_timeout=120
+  #- sudo systemctl start solana-install
+  #- sudo systemctl start solana-config
+  #- sudo systemctl start solana-validator

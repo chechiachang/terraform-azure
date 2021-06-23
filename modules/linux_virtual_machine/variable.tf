@@ -49,7 +49,14 @@ variable "size" {
   default = "Standard_B1ls" # $0.1984/hr
 }
 
-variable "disk_size_gb" {
+# OS Disk
+
+variable "os_disk_type" {
+  type    = string
+  default ="Standard_LRS"
+}
+
+variable "os_disk_size_gb" {
   type    = number
   default = 30
 }
@@ -101,6 +108,11 @@ variable "ssh_key_file_path" {
 }
 
 # Provision
+#
+variable "enable_cloudconfig_file" {
+  type    = bool
+  default = true
+}
 
 variable "cloudconfig_file" {
   type    = string
@@ -142,10 +154,12 @@ variable "tmp_disks" {
 
 variable "storage_account_name" {
   type    = string
+  default = ""
 }
 
 variable "storage_container_name" {
   type    = string
+  default = ""
 }
 
 variable "storage_container_fqdn" {

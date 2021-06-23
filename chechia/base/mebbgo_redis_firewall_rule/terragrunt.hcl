@@ -12,7 +12,7 @@ dependency "redis" {
 }
 
 dependency "vm" {
-  config_path = "../mebbgo_bh"
+  config_path = "../mebbgo"
 }
 
 locals {
@@ -22,8 +22,8 @@ locals {
 inputs = {
   redis_cache_name = dependency.redis.outputs.name
   firewall_rules = {
-    allow-mebbgo-bh = {
-      name     = "allow_mebbgo_bh"
+    allow-mebbgo = {
+      name     = "allow_mebbgo"
       start_ip = dependency.vm.outputs.public_ip_address
       end_ip   = dependency.vm.outputs.public_ip_address
     }
