@@ -70,7 +70,7 @@ resource "azurerm_kubernetes_cluster" "main" {
     }
 
     dynamic "oms_agent" {
-      for_each = var.log_enabled ? list(1) : list(0)
+      for_each = var.log_enabled ? tolist(["1"]) : tolist([])
       content {
         enabled                    = var.log_enabled
         log_analytics_workspace_id = var.log_enabled ? azurerm_log_analytics_workspace.main[0].id : null

@@ -4,6 +4,7 @@ resource "azurerm_kubernetes_cluster_node_pool" "main" {
   kubernetes_cluster_id = azurerm_kubernetes_cluster.main.id
   vm_size               = each.value.vm_size
   node_count            = each.value.node_count
+  mode                  = each.value.mode
   priority              = each.value.priority
   node_labels           = each.value.node_labels
   node_taints           = each.value.node_taints
@@ -19,6 +20,7 @@ resource "azurerm_kubernetes_cluster_node_pool" "spot" {
   kubernetes_cluster_id = azurerm_kubernetes_cluster.main.id
   vm_size               = each.value.vm_size
   node_count            = each.value.node_count
+  mode                  = each.value.mode
   priority              = each.value.priority
   eviction_policy       = each.value.eviction_policy
   spot_max_price        = each.value.spot_max_price

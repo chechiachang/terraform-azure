@@ -1,6 +1,6 @@
 terraform {
-  # source = "../../../modules/kubernetes_cluster"
-  source = "git::ssh://git@github.com/chechiachang/terraform-azure.git//modules/kubernetes_cluster?ref=v0.1.2"
+  source = "../../..//modules/kubernetes_cluster"
+  #source = "git::ssh://git@github.com/chechiachang/terraform-azure.git//modules/kubernetes_cluster?ref=v0.1.2"
 }
 
 include {
@@ -17,13 +17,23 @@ inputs = {
 
   kubeconfig_output_path = "/Users/che-chia/.kube/azure-aks"
 
-  #node_pools = {}
+  # Additional node pool
+
+  #node_pools = {
+  #  ondemand = {
+  #    name       = "spot"
+  #    vm_size    = "Standard_D2_v2"
+  #    node_count = 1
+  #    mode       = "System"
+  #  }
+  #}
 
   #spot_node_pools = {
   #  spot = {
-  #    name = "spot"
-  #    vm_size = "Standard_D2_v2"
+  #    name       = "spot"
+  #    vm_size    = "Standard_D2_v2"
   #    node_count = 1
+  #    mode       = "System"
 
   #    # Spot
   #    priority = "Spot"
