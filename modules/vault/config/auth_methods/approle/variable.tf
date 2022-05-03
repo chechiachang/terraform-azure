@@ -1,4 +1,4 @@
 variable "approle_path" {
-  type = string
+  type    = string
   default = "approle"
 }

@@ -11,7 +11,7 @@ variable "mysql_server_name" {
 }
 
 variable "firewall_rules" {
-  type    = map(object({
+  type = map(object({
     name             = string
     start_ip_address = string
     end_ip_address   = string

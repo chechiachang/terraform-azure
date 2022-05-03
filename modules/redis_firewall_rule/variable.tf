@@ -11,7 +11,7 @@ variable "redis_cache_name" {
 }
 
 variable "firewall_rules" {
-  type    = map(object({
+  type = map(object({
     name     = string
     start_ip = string
     end_ip   = string

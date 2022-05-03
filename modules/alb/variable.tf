@@ -95,9 +95,9 @@ variable "source_image_version" {
 # Disk
 
 variable "data_disks" {
-  type    = list(object({
-    name = string
-    size = number
+  type = list(object({
+    name                 = string
+    size                 = number
     storage_account_type = string
   }))
   default = []

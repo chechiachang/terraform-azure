@@ -15,7 +15,7 @@ variable "storage_account_name" {
 }
 
 variable "name" {
-  type    = string
+  type = string
 }
 
 # Blob
@@ -27,22 +27,22 @@ variable "type" {
 }
 
 variable "blob_source" {
-  type        = string
-  default     = ""
+  type    = string
+  default = ""
 }
 
 # Private endpoint
 
 variable "subnet_id" {
-  type        = string
+  type = string
 }
 
 variable "private_dns_zone_name" {
-  type        = string
-  default     = ""
+  type    = string
+  default = ""
 }
 
 variable "private_dns_zone_id" {
-  type        = string
-  default     = ""
+  type    = string
+  default = ""
 }

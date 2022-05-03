@@ -4,7 +4,7 @@ terraform {
 }
 
 include {
-  path = find_in_parent_folders()  
+  path = find_in_parent_folders()
 }
 
 inputs = {
@@ -41,13 +41,13 @@ inputs = {
       priority                                   = 100
       protocol                                   = "*"
       source_address_prefix                      = ""
-      source_address_prefixes                    = [
+      source_address_prefixes = [
         "118.169.75.176",
         "118.169.87.240"
       ]
-      source_application_security_group_ids      = []
-      source_port_range                          = "*"
-      source_port_ranges                         = []
+      source_application_security_group_ids = []
+      source_port_range                     = "*"
+      source_port_ranges                    = []
     }
   }
 }

@@ -27,7 +27,7 @@ variable "subnets" {
 
 variable "private_dns_zones" {
   type = map(object({
-      name = string
+    name = string
   }))
   default = {
     default = {

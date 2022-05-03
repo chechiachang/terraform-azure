@@ -1,5 +1,5 @@
 variable "auth_approle_path" {
-  type = string
+  type    = string
   default = "approle"
 }
 
@@ -13,12 +13,12 @@ variable "kv_secret_path" {
 }
 
 variable "kv_permissions" {
-  type = list(string)
+  type    = list(string)
   default = ["read", "list"]
 }
 
 variable "kv_policy" {
-  type = string
-  default = ""
+  type        = string
+  default     = ""
   description = "Policy will overwrite kv_secret_path and kv_permissions if not empty"
 }

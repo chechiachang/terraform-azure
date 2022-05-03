@@ -12,7 +12,7 @@ module "auth_azure_chechia" {
   role = "chechia"
   bound_subscription_ids = [
     var.subscription_id
-  ] 
+  ]
   bound_resource_groups = []
   token_policies = [
     "chechia"

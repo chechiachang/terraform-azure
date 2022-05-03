@@ -4,16 +4,16 @@ terraform {
 }
 
 include {
-  path = find_in_parent_folders()  
+  path = find_in_parent_folders()
 }
 
 inputs = {
-  kubernetes_cluster_name = "general"
+  kubernetes_cluster_name   = "general"
   default_node_pool_vm_size = "Standard_D2_v2"
-  default_node_pool_count = 1
+  default_node_pool_count   = 1
 
   network = "base-network"
-  subnet = "base-external"
+  subnet  = "base-external"
 
   kubeconfig_output_path = "/Users/che-chia/.kube/azure-aks"
 

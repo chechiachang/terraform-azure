@@ -6,8 +6,8 @@ data "azurerm_storage_account" "main" {
 data "template_file" "cloudconfig" {
   template = file(var.cloudconfig_file)
   vars = {
-    account_name = var.storage_account_name
-    account_key = data.azurerm_storage_account.main.primary_access_key
+    account_name   = var.storage_account_name
+    account_key    = data.azurerm_storage_account.main.primary_access_key
     container_name = var.storage_container_name
     container_fqdn = var.storage_container_fqdn
   }

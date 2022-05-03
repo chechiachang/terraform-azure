@@ -1,7 +1,7 @@
 variable "path" {
-  type = string
+  type        = string
   description = "Path for auth backend"
-  default = "azure"
+  default     = "azure"
 }
 
 # azure auth
