@@ -42,9 +42,7 @@ resource "azurerm_kubernetes_cluster" "main" {
 
   private_cluster_enabled = false
 
-  role_based_access_control {
-    enabled = false
-  }
+  role_based_access_control_enabled = false
 
   #service_principal {}
 
@@ -52,33 +50,14 @@ resource "azurerm_kubernetes_cluster" "main" {
     environment = var.environment
   }
 
-  addon_profile {
-    aci_connector_linux {
-      enabled = false
-    }
-
-    azure_policy {
-      enabled = false
-    }
-
-    http_application_routing {
-      enabled = false
-    }
-
-    kube_dashboard {
-      enabled = false
-    }
-
-    dynamic "oms_agent" {
-      for_each = var.log_enabled ? tolist(["1"]) : tolist([])
-      content {
-        enabled                    = var.log_enabled
-        log_analytics_workspace_id = var.log_enabled ? azurerm_log_analytics_workspace.main[0].id : null
-      }
-    }
+  ingress_application_gateway {
+    gateway_name  = "ingress-appgateway"
+    subnet_cidr   = "10.1.0.0/16"
   }
 
-  auto_scaler_profile {}
+  auto_scaler_profile {
+    skip_nodes_with_local_storage = false
+  }
 
   default_node_pool {
     name       = "default"
