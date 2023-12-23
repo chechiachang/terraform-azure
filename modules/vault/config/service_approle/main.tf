@@ -6,15 +6,15 @@
 # - a policy
 
 module "kv" {
-  source  = "../secrets_engines/kv"
-  enable  = true
-  name    = var.approle_role_name
+  source = "../secrets_engines/kv"
+  enable = true
+  name   = var.approle_role_name
 }
 
 # kv policy for approle role to bind
 module "kv_policy" {
   source = "../policy/kv"
-  
+
   name        = var.approle_role_name
   path        = var.kv_secret_path
   permissions = var.kv_permissions

@@ -1,5 +1,5 @@
 resource "azurerm_managed_disk" "data" {
-  count                = length(var.data_disks)
+  count = length(var.data_disks)
 
   name                 = "${var.virtual_machine_name}-${var.data_disks[count.index].name}"
   location             = var.location
@@ -10,7 +10,7 @@ resource "azurerm_managed_disk" "data" {
 }
 
 resource "azurerm_virtual_machine_data_disk_attachment" "data" {
-  count              = length(var.data_disks)
+  count = length(var.data_disks)
 
   virtual_machine_id = azurerm_linux_virtual_machine.main.id
   managed_disk_id    = azurerm_managed_disk.data[count.index].id
@@ -21,7 +21,7 @@ resource "azurerm_virtual_machine_data_disk_attachment" "data" {
 # Tmp disks raid
 
 resource "azurerm_managed_disk" "tmp" {
-  count                = var.tmp_disks.number
+  count = var.tmp_disks.number
 
   name                 = "${var.virtual_machine_name}-${var.tmp_disks.name}-${count.index}"
   location             = var.location
@@ -36,7 +36,7 @@ resource "azurerm_managed_disk" "tmp" {
 }
 
 resource "azurerm_virtual_machine_data_disk_attachment" "tmp" {
-  count                = var.tmp_disks.number
+  count = var.tmp_disks.number
 
   virtual_machine_id = azurerm_linux_virtual_machine.main.id
   managed_disk_id    = azurerm_managed_disk.tmp[count.index].id

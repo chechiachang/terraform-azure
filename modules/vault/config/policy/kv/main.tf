@@ -7,7 +7,7 @@ data "vault_policy_document" "main" {
 }
 
 resource "vault_policy" "main" {
-  name   = var.name
+  name = var.name
   # Allow input overwrite
   policy = (var.policy == "") ? data.vault_policy_document.main.hcl : var.policy
 }

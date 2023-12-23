@@ -35,11 +35,11 @@ variable "capacity" {
 }
 
 variable "enable_non_ssl_port" {
-  type = string
+  type    = string
   default = "false"
 }
 
 variable "ssl_minimal_tls_version" {
-  type = string
+  type    = string
   default = "1.2"
 }

@@ -38,13 +38,13 @@ variable "priority" {
 # network
 
 variable "load_balancer_backend_address_pool_ids" {
-  type        = list(string)
-  default     = []
+  type    = list(string)
+  default = []
 }
 
 variable "load_balancer_inbound_nat_rules_ids" {
-  type        = list(string)
-  default     = []
+  type    = list(string)
+  default = []
 }
 
 variable "network" {
@@ -58,7 +58,7 @@ variable "subnet" {
 }
 
 variable "allowed_ssh_cidr_blocks" {
-  type    = list
+  type    = list(any)
   default = []
 }
 
@@ -100,9 +100,9 @@ variable "source_image_version" {
 # Disk
 
 variable "data_disks" {
-  type    = list(object({
-    name = string
-    size = number
+  type = list(object({
+    name                 = string
+    size                 = number
     storage_account_type = string
   }))
   default = []
@@ -130,11 +130,11 @@ variable "ssh_key_file_path" {
 # chia
 
 variable "storage_account_name" {
-  type    = string
+  type = string
 }
 
 variable "storage_container_name" {
-  type    = string
+  type = string
 }
 
 variable "storage_container_fqdn" {

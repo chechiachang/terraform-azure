@@ -1,5 +1,5 @@
 variable "subscription_id" {
- type = string
+  type = string
 }
 
 variable "resource_group_name" {
@@ -53,7 +53,7 @@ variable "size" {
 
 variable "os_disk_type" {
   type    = string
-  default ="Standard_LRS"
+  default = "Standard_LRS"
 }
 
 variable "os_disk_size_gb" {
@@ -127,16 +127,16 @@ variable "custom_data" {
 # disk
 
 variable "data_disks" {
-  type    = list(object({
-    name = string
-    size = number
+  type = list(object({
+    name                 = string
+    size                 = number
     storage_account_type = string
   }))
   default = []
 }
 
 variable "tmp_disks" {
-  type    = object({
+  type = object({
     name                 = string
     number               = number
     size                 = number

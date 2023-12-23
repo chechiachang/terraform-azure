@@ -35,7 +35,7 @@ variable "subnet" {
 }
 
 variable "allowed_ssh_cidr_blocks" {
-  type = list
+  type = list(any)
 }
 
 variable "api_port" {

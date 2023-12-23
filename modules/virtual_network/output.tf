@@ -7,13 +7,13 @@ output "virtual_network_id" {
 }
 
 output "subnet_names" {
-  value = toset([
+  value = [
     for subnet in azurerm_subnet.internal : subnet.name
-  ])
+  ]
 }
 
 output "subnet_ids" {
-  value = toset([
+  value = [
     for subnet in azurerm_subnet.internal : subnet.id
-  ])
+  ]
 }

@@ -29,29 +29,29 @@ variable "sku_name" {
 }
 
 variable "databases" {
-  type    = map(object({
+  type = map(object({
     name = string
   }))
   default = {}
 }
 
 variable "storage_mb" {
-  type = number
+  type    = number
   default = 5120
 }
 
 variable "auto_grow_enabled" {
-  type = bool
+  type    = bool
   default = false
 }
 
 variable "ssl_enforcement_enabled" {
-  type = bool
+  type    = bool
   default = true
 }
 
 variable "ssl_minimal_tls_version_enforced" {
-  type = string
+  type    = string
   default = "TLS1_2"
 }
 
@@ -62,10 +62,10 @@ variable "administrator_login" {
 # Network
 
 variable "virtual_network_rules" {
-  type    = map(object({
-    name = string
+  type = map(object({
+    name    = string
     network = string
-    subnet = string
+    subnet  = string
   }))
   default = {}
 }

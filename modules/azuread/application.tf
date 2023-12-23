@@ -41,8 +41,8 @@ resource "random_string" "password" {
 resource "azuread_application_password" "main" {
   application_object_id = azuread_application.main.id
   #description           = "My managed password"
-  value                 = random_string.password.result
-  end_date              = "2099-01-01T01:02:03Z"
+  value    = random_string.password.result
+  end_date = "2099-01-01T01:02:03Z"
 }
 
 # Create a service principal

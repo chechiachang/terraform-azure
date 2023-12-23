@@ -10,7 +10,7 @@ data "azurerm_storage_account" "main" {
 
 resource "azurerm_storage_container" "main" {
   name                  = var.name
-  storage_account_name   = data.azurerm_storage_account.main.name
+  storage_account_name  = data.azurerm_storage_account.main.name
   container_access_type = "private"
 }
 

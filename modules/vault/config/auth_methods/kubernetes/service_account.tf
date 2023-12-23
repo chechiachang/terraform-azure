@@ -19,7 +19,7 @@ resource "kubernetes_service_account" "vault_auth" {
 
 resource "kubernetes_cluster_role_binding" "vault_auth" {
   metadata {
-    name      = "vault-auth"
+    name = "vault-auth"
   }
   role_ref {
     api_group = "rbac.authorization.k8s.io"
@@ -36,7 +36,7 @@ resource "kubernetes_cluster_role_binding" "vault_auth" {
 # Kubernetes service account secret
 data "kubernetes_secret" "vault_auth" {
   metadata {
-    name = kubernetes_service_account.vault_auth.default_secret_name
+    name      = kubernetes_service_account.vault_auth.default_secret_name
     namespace = "kube-system"
   }
 }

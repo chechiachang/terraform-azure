@@ -16,5 +16,5 @@ variable "name" {
 }
 
 variable "rules" {
-  type = map
+  type = map(any)
 }

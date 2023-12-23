@@ -50,12 +50,12 @@ variable "default_node_pool_count" {
 # Cluster::node_pool
 
 variable "node_pools" {
-  type    = map
+  type    = map(any)
   default = {}
 }
 
 variable "spot_node_pools" {
-  type    = map
+  type    = map(any)
   default = {}
 }
 

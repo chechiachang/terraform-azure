@@ -15,7 +15,7 @@ variable "permissions" {
 }
 
 variable "policy" {
-  type = string
-  default = ""
+  type        = string
+  default     = ""
   description = "Policy will overwrite path and permissions if not empty"
 }
