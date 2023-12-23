@@ -4,17 +4,17 @@ terraform {
 }
 
 include {
-  path = find_in_parent_folders()  
+  path = find_in_parent_folders()
 }
 
 locals {
-  common      = yamldecode(file("${find_in_parent_folders("locals/common.yaml")}"))
+  common = yamldecode(file("${find_in_parent_folders("locals/common.yaml")}"))
 }
 
 inputs = {
-  name      = "mebbgo"
-  sku_name  = "Standard"
-  family    = "C"
-  capacity  =  0
+  name                = "mebbgo"
+  sku_name            = "Standard"
+  family              = "C"
+  capacity            = 0
   enable_non_ssl_port = true
 }

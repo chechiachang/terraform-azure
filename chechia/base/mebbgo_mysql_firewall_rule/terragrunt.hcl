@@ -4,7 +4,7 @@ terraform {
 }
 
 include {
-  path = find_in_parent_folders()  
+  path = find_in_parent_folders()
 }
 
 dependency "mysql" {
@@ -16,7 +16,7 @@ dependency "vm" {
 }
 
 locals {
-  common      = yamldecode(file("${find_in_parent_folders("locals/common.yaml")}"))
+  common = yamldecode(file("${find_in_parent_folders("locals/common.yaml")}"))
 }
 
 inputs = {

@@ -28,6 +28,11 @@ Edit environments
 vim env.tfvars
 
 az login
+az account list
+
+az account set --subscription="SUBSCRIPTION_ID"
+export SUBSCRIPTION_ID="SUBSCRIPTION_ID"
+
 terragrunt init && terragrunt plan
 ```
 

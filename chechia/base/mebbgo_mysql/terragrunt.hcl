@@ -4,21 +4,21 @@ terraform {
 }
 
 include {
-  path = find_in_parent_folders()  
+  path = find_in_parent_folders()
 }
 
 locals {
-  common      = yamldecode(file("${find_in_parent_folders("locals/common.yaml")}"))
+  common = yamldecode(file("${find_in_parent_folders("locals/common.yaml")}"))
 }
 
 inputs = {
-  name                              = "mebbgo"
-  administrator_login               = "chechia"
-  sku_name                          = "B_Gen5_1"
-  storage_mb                        = 5120
-  auto_grow_enabled                 = false
-  ssl_enforcement_enabled           = false
-  ssl_minimal_tls_version_enforced  = "TLSEnforcementDisabled"
+  name                             = "mebbgo"
+  administrator_login              = "chechia"
+  sku_name                         = "B_Gen5_1"
+  storage_mb                       = 5120
+  auto_grow_enabled                = false
+  ssl_enforcement_enabled          = false
+  ssl_minimal_tls_version_enforced = "TLSEnforcementDisabled"
 
   databases = {
     bbgo = {

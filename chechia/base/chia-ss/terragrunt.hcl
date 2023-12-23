@@ -4,7 +4,7 @@ terraform {
 }
 
 include {
-  path = find_in_parent_folders()  
+  path = find_in_parent_folders()
 }
 
 dependency "foundation" {
@@ -26,14 +26,14 @@ inputs = {
   instances = 0
 
   network = dependency.virtual_network.outputs.virtual_network_name
-  subnet = "base-external"
+  subnet  = "base-external"
 
-  priority = "Spot"
+  priority      = "Spot"
   max_bid_price = "0.16" # > 0.15708
 
   source_image_publisher = "canonical"
-  source_image_offer = "0001-com-ubuntu-server-focal"
-  source_image_sku = "20_04-lts-gen2"
+  source_image_offer     = "0001-com-ubuntu-server-focal"
+  source_image_sku       = "20_04-lts-gen2"
 
   ssh_key_file_path = "~/.ssh/chia.pub"
   allowed_ssh_cidr_blocks = [
@@ -53,7 +53,7 @@ inputs = {
 
   # Chia
 
-  storage_account_name = dependency.foundation.outputs.storage_account_name
+  storage_account_name   = dependency.foundation.outputs.storage_account_name
   storage_container_name = dependency.blob.outputs.storage_container_name
   storage_container_fqdn = dependency.blob.outputs.storage_account_private_endpoint_fqdn
 }

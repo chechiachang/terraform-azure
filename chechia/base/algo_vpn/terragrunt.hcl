@@ -4,13 +4,13 @@ terraform {
 }
 
 include {
-  path = find_in_parent_folders()  
+  path = find_in_parent_folders()
 }
 
 inputs = {
   virtual_machine_name = "algo-vpn"
-  network = "base-network"
-  subnet = "base-external"
-  use_public_ip = true
-  size = "Standard_D2_v2"
+  network              = "base-network"
+  subnet               = "base-external"
+  use_public_ip        = true
+  size                 = "Standard_D2_v2"
 }

@@ -3,4 +3,4 @@ resource_group_name = "base"
 
 # environment
 environment = "base"
-location = "southeastasia"
+location    = "southeastasia"
