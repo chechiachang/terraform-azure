@@ -12,16 +12,16 @@ dependency "foundation" {
 }
 
 dependency "virtual_network" {
-  config_path = find_in_parent_folders("base/virtual_network")
+  config_path = find_in_parent_folders("ntuchorus/virtual_network")
 }
 
 dependency "security_group" {
-  #config_path = find_in_parent_folders("ntuchorus/security_group")
-  config_path = find_in_parent_folders("base/security_group")
+  config_path = find_in_parent_folders("ntuchorus/security_group")
+  #config_path = find_in_parent_folders("base/security_group")
 }
 
 inputs = {
-  virtual_machine_name = "ntuchorus-wordpress"
+  virtual_machine_name = "ntuchorus-wordpress-prod"
   network              = dependency.virtual_network.outputs.virtual_network_name
   subnet               = dependency.virtual_network.outputs.subnet_names[0]
   use_public_ip        = true
@@ -33,7 +33,7 @@ inputs = {
   source_image_sku   = "22_04-lts-gen2"
 
   enable_cloudconfig_file = false
-  cloudconfig_file        = ".../../../..//templates/cloud_config/empty.yaml"
+  cloudconfig_file        = ".../../../..//templates/cloud_config/wordpress.yaml"
 
   storage_account_name = dependency.foundation.outputs.storage_account_name
 }

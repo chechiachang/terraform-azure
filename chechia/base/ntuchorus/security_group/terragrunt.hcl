@@ -10,23 +10,61 @@ include {
 inputs = {
   name = "ntuchorus-wordpress"
   rules = {
-    chechia22 = {
+    chechia = {
       access                                     = "Allow"
       description                                = ""
       destination_address_prefix                 = "*"
-      destination_address_prefixes               = []
       destination_application_security_group_ids = []
-      destination_port_range                     = "22"
-      destination_port_ranges                    = []
+      destination_port_ranges                    = ["22", "80", "443"]
       direction                                  = "Inbound"
-      name                                       = "Chechia_22"
+      name                                       = "Chechia"
       priority                                   = 100
       protocol                                   = "*"
-      source_address_prefix                      = "59.125.102.45"
-      source_address_prefixes                    = []
+      source_address_prefixes                    = ["59.125.102.45/32"]
       source_application_security_group_ids      = []
       source_port_range                          = "*"
-      source_port_ranges                         = []
+    }
+    zen_home = {
+      access                                     = "Allow"
+      description                                = ""
+      destination_address_prefix                 = "*"
+      destination_application_security_group_ids = []
+      destination_port_ranges                    = ["22", "80", "443"]
+      direction                                  = "Inbound"
+      name                                       = "Zen_home"
+      priority                                   = 110
+      protocol                                   = "*"
+      source_address_prefixes                    = ["123.194.157.6/32"]
+      source_application_security_group_ids      = []
+      source_port_range                          = "*"
+    }
+    chechia_tmp = {
+      access                                     = "Allow"
+      description                                = ""
+      destination_address_prefix                 = "*"
+      destination_application_security_group_ids = []
+      destination_port_ranges                    = ["22", "80", "443"]
+      direction                                  = "Inbound"
+      name                                       = "Chechia_tmp"
+      priority                                   = 130
+      protocol                                   = "*"
+      source_address_prefixes                    = ["111.125.132.182/32"] # TPE free
+      source_application_security_group_ids      = []
+      source_port_range                          = "*"
+    }
+    public_443 = {
+      access                                     = "Allow"
+      description                                = ""
+      destination_address_prefix                 = "*"
+      destination_application_security_group_ids = []
+      destination_port_ranges                    = ["443"]
+      direction                                  = "Inbound"
+      name                                       = "Public_443"
+      priority                                   = 200
+      protocol                                   = "*"
+      source_address_prefixes                    = ["123.194.157.6/32"]
+      source_application_security_group_ids      = []
+      source_port_range                          = "*"
     }
   }
 }
