@@ -52,17 +52,17 @@ inputs = {
       source_application_security_group_ids      = []
       source_port_range                          = "*"
     }
-    public_443 = {
+    public_80_443 = {
       access                                     = "Allow"
       description                                = ""
       destination_address_prefix                 = "*"
       destination_application_security_group_ids = []
-      destination_port_ranges                    = ["443"]
+      destination_port_ranges                    = ["80", "443"]
       direction                                  = "Inbound"
-      name                                       = "Public_443"
+      name                                       = "Public_80_443"
       priority                                   = 200
       protocol                                   = "*"
-      source_address_prefixes                    = ["123.194.157.6/32"]
+      source_address_prefixes                    = ["0.0.0.0/0"]
       source_application_security_group_ids      = []
       source_port_range                          = "*"
     }

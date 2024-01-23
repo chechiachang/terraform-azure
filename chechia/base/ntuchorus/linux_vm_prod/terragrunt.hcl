@@ -32,7 +32,7 @@ inputs = {
   source_image_offer = "0001-com-ubuntu-server-jammy"
   source_image_sku   = "22_04-lts-gen2"
 
-  enable_cloudconfig_file = false
+  enable_cloudconfig_file = true
   cloudconfig_file        = ".../../../..//templates/cloud_config/wordpress.yaml"
 
   storage_account_name = dependency.foundation.outputs.storage_account_name
