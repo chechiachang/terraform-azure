@@ -11,7 +11,11 @@ dependency "virtual_network" {
 }
 
 inputs = {
-  name    = "workshop-bastion"
-  network = dependency.virtual_network.outputs.virtual_network_name
-  subnet  = "base-external"
+  resource_group_name = "base"
+
+  name                   = "workshop-bastion"
+  network                = dependency.virtual_network.outputs.virtual_network_name
+  subnet                 = "AzureBastionSubnet"
+  sku                    = "Standard"
+  shareable_link_enabled = true
 }
