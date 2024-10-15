@@ -8,3 +8,10 @@ provider "registry.terraform.io/hashicorp/azurerm" {
     "h1:uZzo+Ek68F+e+bBad7v1P3Yaf/1w8Uctj0Zdj04B31M=",
   ]
 }
+
+provider "registry.terraform.io/hashicorp/template" {
+  version = "2.2.0"
+  hashes = [
+    "h1:vQ9WXdK9CwaPBRSR0fZsgffnTVLwVwJ3IGx15NWluJ0=",
+  ]
+}

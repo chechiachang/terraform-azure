@@ -21,14 +21,15 @@ resource "azurerm_linux_virtual_machine_scale_set" "main" {
   os_disk {
     caching              = "ReadWrite"
     storage_account_type = "Standard_LRS"
-    #disk_size_gb = var.disk_size_gb
+    disk_size_gb         = var.os_disk_size_gb
     # diff_disk_settings {}
   }
 
-  admin_username                  = var.username
-  disable_password_authentication = true
+  admin_username                  = var.admin_username
+  admin_password                  = var.admin_password
+  disable_password_authentication = var.disable_password_authentication
   admin_ssh_key {
-    username   = var.username
+    username   = var.admin_username
     public_key = file(var.ssh_key_file_path)
   }
 
