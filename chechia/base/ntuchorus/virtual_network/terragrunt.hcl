@@ -11,7 +11,7 @@ dependency "sg" {
 }
 
 inputs = {
-  name = "ntuchorus"
+  name                  = "ntuchorus"
   virtual_network_space = ["10.1.0.0/16"]
   subnets = {
     ntuchorus-external = {
