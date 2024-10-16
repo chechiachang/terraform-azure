@@ -99,6 +99,11 @@ variable "source_image_version" {
 
 # Disk
 
+variable "os_disk_size_gb" {
+  type    = number
+  default = 50
+}
+
 variable "data_disks" {
   type = list(object({
     name                 = string
@@ -117,9 +122,18 @@ variable "cloudconfig_file" {
 
 # SSH
 
-variable "username" {
+variable "admin_username" {
+  type = string
+}
+
+variable "admin_password" {
   type    = string
-  default = "chechia"
+  default = ""
+}
+
+variable "disable_password_authentication" {
+  type    = bool
+  default = true
 }
 
 variable "ssh_key_file_path" {
