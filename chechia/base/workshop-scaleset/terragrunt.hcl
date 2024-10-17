@@ -23,8 +23,9 @@ inputs = {
   name = "workshop"
 
   # az vm list-skus --location southeastasia --size Standard_B --all --output table
-  sku       = "Standard_B1s" # 1cpu 1GiB memory $0.3212/d
-  instances = 2
+  #sku       = "Standard_B1s" # 1cpu 1GiB memory $0.3212/d
+  sku       = "Standard_B2s" # 1cpu 1GiB memory $0.3212/d
+  instances = 0
 
   network = dependency.virtual_network.outputs.virtual_network_name
   subnet  = "base-external"
@@ -37,7 +38,7 @@ inputs = {
   source_image_sku       = "server"
 
   admin_username                  = "workshop"
-  admin_password                  = "workshop!234"
+  admin_password                  = "workshop1234!"
   disable_password_authentication = false
   ssh_key_file_path               = "~/.ssh/workshop.pub"
   allowed_ssh_cidr_blocks = [
