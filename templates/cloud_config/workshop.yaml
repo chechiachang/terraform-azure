@@ -1,9 +1,50 @@
 #cloud-config
 # https://cloudinit.readthedocs.io/en/latest/topics/examples.html
+package_update: true
 package_upgrade: true
 packages:
+  - apt-transport-https
+  - ca-certificates
   - curl
-  - git
+  - gnupg
+  - lsb-release
+  - unattended-upgrades
+  - jq
+
+groups:
+  - docker
+
+system_info:
+  default_user:
+    groups: [ docker ]
 
 runcmd:
-  - sudo apt-get update
+  # install docker
+  - install -m 0755 -d /etc/apt/keyrings
+  - curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
+  - chmod a+r /etc/apt/keyrings/docker.asc
+  - echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu $(. /etc/os-release && echo "$VERSION_CODENAME") stable" | tee /etc/apt/sources.list.d/docker.list > /dev/null
+  - apt-get update
+  - apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+  - systemctl enable docker
+  - systemctl start docker
+  # kubectl
+  - curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
+  - curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl.sha256"
+  - echo "$(cat kubectl.sha256)  kubectl" | sha256sum --check
+  - install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
+  # etcdctl
+  - curl -fsSL https://github.com/etcd-io/etcd/releases/download/v3.5.16/etcd-v3.5.16-linux-amd64.tar.gz -o etcd-v3.5.16-linux-amd64.tar.gz
+  - tar xvf etcd-v3.5.16-linux-amd64.tar.gz -C /usr/local/bin --strip-components=1 etcd-v3.5.16-linux-amd64/etcdctl
+  # docker images
+  - docker pull quay.io/coreos/etcd:v3.5.15
+  - docker pull registry.k8s.io/kube-apiserver:v1.31.0
+  - docker pull registry.k8s.io/kube-controller-manager:v1.31.0
+  - docker pull registry.k8s.io/kube-scheduler:v1.31.0
+  - docker pull bitnami/kubectl:1.31.1-debian-12-r3
+  # utils
+  - wget https://github.com/mikefarah/yq/releases/download/v4.44.3/yq_linux_amd64 -O yq
+  - install -o root -g root -m 0755 yq /usr/bin/yq
+
+
+final_message: "The system is finally up, after $UPTIME seconds"
