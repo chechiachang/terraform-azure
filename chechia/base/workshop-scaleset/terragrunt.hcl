@@ -24,7 +24,7 @@ inputs = {
 
   # az vm list-skus --location southeastasia --size Standard_B --all --output table
   #sku       = "Standard_B1s" # 1cpu 1GiB memory $0.3212/d
-  sku       = "Standard_B2s" # 2cpu 4GiB memory $0.3212/d
+  sku = "Standard_B2s" # 2cpu 4GiB memory $0.3212/d
   #sku       = "Standard_B4ms" # 4cpu 16GiB memory $0.3212/d
   instances = 0
   #instances = 45
