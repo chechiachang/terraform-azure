@@ -58,6 +58,19 @@ inputs = {
         capacity = 340
       }
       rai_policy_name = local.rai_policy_name
+    },
+    "text-embedding-3-small" = {
+      name = "text-embedding-3-small"
+      model = {
+        format  = "OpenAI"
+        name    = "text-embedding-3-small"
+        version = "1"
+      }
+      scale = {
+        type     = "Standard"
+        capacity = 340
+      }
+      rai_policy_name = local.rai_policy_name
     }
   }
 
