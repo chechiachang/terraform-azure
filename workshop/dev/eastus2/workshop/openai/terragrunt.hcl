@@ -55,7 +55,7 @@ inputs = {
       }
       scale = {
         type     = "Standard"
-        capacity = 340
+        capacity = 700
       }
       rai_policy_name = local.rai_policy_name
     },
