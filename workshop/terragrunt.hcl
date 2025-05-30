@@ -34,9 +34,9 @@ generate "provider" {
   path      = "provider.tf"
   if_exists = "overwrite"
   contents  = <<EOF
-variable "subscription_id" {
-  type = string
-}
+#variable "subscription_id" {
+#  type = string
+#}
 
 provider "azurerm" {
   features {}

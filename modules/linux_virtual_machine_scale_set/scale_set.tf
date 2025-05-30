@@ -41,6 +41,7 @@ resource "azurerm_linux_virtual_machine_scale_set" "main" {
   network_interface {
     name    = "main"
     primary = true
+    #network_security_group_id = var.network_security_group_id
 
     ip_configuration {
       name      = "internal"

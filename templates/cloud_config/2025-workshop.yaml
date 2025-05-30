@@ -1,0 +1,41 @@
+#cloud-config
+# https://cloudinit.readthedocs.io/en/latest/topics/examples.html
+package_update: true
+package_upgrade: true
+packages:
+  - ca-certificates
+  - curl
+  - gnupg
+  - lsb-release
+  #- unattended-upgrades
+  - jq
+
+groups:
+  - docker
+
+system_info:
+  default_user:
+    groups: [ docker ]
+
+runcmd:
+  # install docker
+  - install -m 0755 -d /etc/apt/keyrings
+  - curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
+  - chmod a+r /etc/apt/keyrings/docker.asc
+  - echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu $(. /etc/os-release && echo "$VERSION_CODENAME") stable" | tee /etc/apt/sources.list.d/docker.list > /dev/null
+  - apt-get update
+  - apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+  - systemctl enable docker
+  - systemctl start docker
+  # docker images
+  - docker pull quay.io/jupyter/base-notebook:python-3.12.10
+  - docker pull qdrant/qdrant:v1.14.0
+  - docker pull ngrok/ngrok:3.22.1-alpine-e0691d2
+  # python packages
+  - pip install pandas openai qdrant_client tqdm tenacity wget tenacity unstructured markdown ragas sacrebleu langchain_qdrant langchain-openai langchain_openai langchain_community
+  # utils
+  - wget https://github.com/mikefarah/yq/releases/download/v4.44.3/yq_linux_amd64 -O yq
+  - install -o root -g root -m 0755 yq /usr/bin/yq
+
+
+final_message: "The system is finally up, after $UPTIME seconds"
