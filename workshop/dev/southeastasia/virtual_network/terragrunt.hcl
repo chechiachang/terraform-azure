@@ -23,6 +23,7 @@ inputs = {
       name                      = "Workshop"
       address_prefixes          = ["10.0.2.0/24"]
       network_security_group_id = dependency.sg.outputs.resource.id
+      default_outbound_access_enabled = true
     },
     bastion-subnet = {
       name                      = "AzureBastionSubnet"

@@ -15,11 +15,17 @@ dependency "blob" {
   config_path = "../blob"
 }
 
+dependency "sg" {
+  config_path = "../security_group"
+}
+
 inputs = {
   environment = "dev"
   location    = "southeastasia"
 
-  name = "workshop"
+  name                = "workshop"
+  security_gruop_name = dependency.sg.outputs.resource.resource_group_name
+  network_security_group_id = dependency.sg.outputs.resource.id
 
   # az vm list-skus --location southeastasia --size Standard_B --all --output table
   #sku       = "Standard_B1s" # 1cpu 1GiB memory $0.3212/d
@@ -43,7 +49,7 @@ inputs = {
   disable_password_authentication = false
   ssh_key_file_path               = "~/.ssh/workshop.pub"
   allowed_ssh_cidr_blocks = [
-    "10.0.3.0/24"
+    "10.0.2.0/24"
   ]
 
   os_disk_size_gb = 30

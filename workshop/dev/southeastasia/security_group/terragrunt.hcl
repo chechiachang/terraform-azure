@@ -45,6 +45,21 @@ inputs = {
       source_application_security_group_ids      = []
       source_port_range                          = "*"
     }
+    scaleset-in-internet = {
+      access                                     = "Allow"
+      description                                = ""
+      destination_address_prefix                 = "10.0.2.0/24"
+      destination_application_security_group_ids = []
+      destination_port_ranges                    = ["80", "443"]
+      direction                                  = "Inbound"
+      name                                       = "scaleset-in-internet"
+      priority                                   = 130
+      protocol                                   = "*"
+      source_address_prefix                      = "Internet"
+      source_application_security_group_ids      = []
+      source_port_range                          = "*"
+    }
+
     # Outbound rules
     bastion-out-vm = {
       access                                     = "Allow"
@@ -99,6 +114,20 @@ inputs = {
       priority                                   = 140
       protocol                                   = "Tcp"
       source_address_prefix                      = "*"
+      source_application_security_group_ids      = []
+      source_port_range                          = "*"
+    }
+    scaleset-out-internet = {
+      access                                     = "Allow"
+      description                                = ""
+      destination_address_prefix                 = "Internet"
+      destination_application_security_group_ids = []
+      destination_port_ranges                    = ["80", "443"]
+      direction                                  = "Outbound"
+      name                                       = "scaleset-out-internet"
+      priority                                   = 150
+      protocol                                   = "Tcp"
+      source_address_prefix                      = "10.0.2.0/24"
       source_application_security_group_ids      = []
       source_port_range                          = "*"
     }

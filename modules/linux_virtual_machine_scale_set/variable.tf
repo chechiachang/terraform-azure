@@ -122,6 +122,18 @@ variable "cloudconfig_file" {
 
 # SSH
 
+variable "security_gruop_name" {
+  type        = string
+  default     = ""
+  description = "Name of the security group to use for SSH access. If not provided, a new security group will be created."
+}
+
+variable "network_security_group_id" {
+  type        = string
+  default     = ""
+  description = "ID of the network security group to use for SSH access. If not provided, a new security group will be created."
+}
+
 variable "admin_username" {
   type = string
 }

@@ -55,5 +55,5 @@ inputs = {
   storage_container_name = dependency.blob.outputs.storage_container_name
   storage_container_fqdn = dependency.blob.outputs.storage_account_private_endpoint_fqdn
 
-  cloudconfig_file = "../../templates/cloud_config/workshop.yaml"
+  cloudconfig_file = "../../templates/cloud_config/2025-workshop.yaml"
 }
