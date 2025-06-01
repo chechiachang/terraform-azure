@@ -71,6 +71,19 @@ inputs = {
         capacity = 340
       }
       rai_policy_name = local.rai_policy_name
+    },
+    "text-embedding-ada-002" = {
+      name = "text-embedding-ada-002"
+      model = {
+        format  = "OpenAI"
+        name    = "text-embedding-ada-002"
+        version = "2"
+      }
+      scale = {
+        type     = "GlobalStandard"
+        capacity = 350
+      }
+      rai_policy_name = local.rai_policy_name
     }
   }
 
