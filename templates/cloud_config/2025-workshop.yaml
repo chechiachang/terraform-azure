@@ -33,6 +33,7 @@ runcmd:
   - docker pull ngrok/ngrok:3.22.1-alpine-e0691d2
   # workshop setup
   - git clone https://github.com/chechiachang/rag-workshop.git /home/workshop/rag-workshop
+  - chown -R workshop:workshop /home/workshop/rag-workshop
   - cd /home/workshop/rag-workshop; docker compose up -d
   - docker exec -it notebook pip install pandas openai qdrant_client tqdm tenacity wget tenacity unstructured markdown ragas sacrebleu langchain_qdrant langchain-openai langchain_openai langchain_community tiktoken
   # utils
