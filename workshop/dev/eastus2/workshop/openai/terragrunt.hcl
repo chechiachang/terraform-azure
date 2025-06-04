@@ -20,6 +20,32 @@ inputs = {
   sku_name = "S0"
 
   cognitive_deployments = {
+    "o4-mini" = {
+      name = "o4-mini"
+      model = {
+        format  = "OpenAI"
+        name    = "o4-mini"
+        version = "2025-04-16"
+      }
+      scale = {
+        type     = "GlobalStandard"
+        capacity = 600
+      }
+      rai_policy_name = local.rai_policy_name
+    },
+    "o3-mini" = {
+      name = "o3-mini"
+      model = {
+        format  = "OpenAI"
+        name    = "o3-mini"
+        version = "2025-01-31"
+      }
+      scale = {
+        type     = "GlobalStandard"
+        capacity = 5000
+      }
+      rai_policy_name = local.rai_policy_name
+    },
     "gpt-41" = {
       name = "gpt-4.1"
       model = {
@@ -43,6 +69,32 @@ inputs = {
       scale = {
         type     = "GlobalStandard"
         capacity = 1000
+      }
+      rai_policy_name = local.rai_policy_name
+    },
+    "gpt-4o" = {
+      name = "gpt-4o"
+      model = {
+        format  = "OpenAI"
+        name    = "gpt-4o"
+        version = "2024-11-20"
+      }
+      scale = {
+        type     = "GlobalStandard"
+        capacity = 30000
+      }
+      rai_policy_name = local.rai_policy_name
+    },
+    "gpt-4o-mini" = {
+      name = "gpt-4o-mini"
+      model = {
+        format  = "OpenAI"
+        name    = "gpt-4o-mini"
+        version = "2024-07-18"
+      }
+      scale = {
+        type     = "GlobalStandard"
+        capacity = 150000
       }
       rai_policy_name = local.rai_policy_name
     },
@@ -81,7 +133,7 @@ inputs = {
       }
       scale = {
         type     = "GlobalStandard"
-        capacity = 350
+        capacity = 1000
       }
       rai_policy_name = local.rai_policy_name
     }

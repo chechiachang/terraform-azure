@@ -23,16 +23,17 @@ inputs = {
   environment = "dev"
   location    = "southeastasia"
 
-  name                = "workshop"
-  security_gruop_name = dependency.sg.outputs.resource.resource_group_name
+  name                      = "workshop"
+  security_gruop_name       = dependency.sg.outputs.resource.resource_group_name
   network_security_group_id = dependency.sg.outputs.resource.id
 
   # az vm list-skus --location southeastasia --size Standard_B --all --output table
-  #sku       = "Standard_B1s" # 1cpu 1GiB memory $0.3212/d
-  sku = "Standard_B2s" # 2cpu 4GiB memory $0.3212/d
-  #sku       = "Standard_B4ms" # 4cpu 16GiB memory $0.3212/d
-  instances = 1
-  #instances = 45
+  #sku = "Standard_B1ms" # 1cpu 2GiB memory $0.0207/hr
+  #sku = "Standard_B2ms" # 2cpu 8GiB memory $0.0832/hr
+  sku = "Standard_B4ms" # 4cpu 16GiB memory $0.1660/hr 60 nodes
+  #sku = "Standard_B8ms" # 8cpu 32GiB memory $0.3330/hr
+  instances = 0
+  #instances = 60
 
   network = dependency.virtual_network.outputs.resource.name
   subnet  = "Workshop"
