@@ -30,7 +30,7 @@ inputs = {
   # az vm list-skus --location southeastasia --size Standard_B --all --output table
   #sku = "Standard_B1ms" # 1cpu 2GiB memory $0.0207/hr
   #sku = "Standard_B2ms" # 2cpu 8GiB memory $0.0832/hr
-  sku = "Standard_B4ms" # 4cpu 16GiB memory $0.1660/hr 60 nodes
+  sku = "Standard_B4ms" # 4cpu 16GiB memory $0.1660/hr
   #sku = "Standard_B8ms" # 8cpu 32GiB memory $0.3330/hr
   instances = 0
   #instances = 60
