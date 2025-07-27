@@ -4,6 +4,10 @@ variable "resource_group_name" {
   type = string
 }
 
+variable "subscription_id" {
+  type = string
+}
+
 # Mysql
 
 variable "mysql_server_name" {
