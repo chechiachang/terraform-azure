@@ -32,6 +32,32 @@ inputs = {
         capacity = 400
       }
       rai_policy_name = local.rai_policy_name
+    },
+    "gpt-5-mini" = {
+      name = "gpt-5-mini"
+      model = {
+        format  = "OpenAI"
+        name    = "gpt-5-mini"
+        version = "2025-08-07"
+      }
+      scale = {
+        type     = "GlobalStandard"
+        capacity = 400
+      }
+      rai_policy_name = local.rai_policy_name
+    },
+    "gpt-5-nano" = {
+      name = "gpt-5-nano"
+      model = {
+        format  = "OpenAI"
+        name    = "gpt-5-nano"
+        version = "2025-08-07"
+      }
+      scale = {
+        type     = "GlobalStandard"
+        capacity = 400
+      }
+      rai_policy_name = local.rai_policy_name
     }
   }
 
