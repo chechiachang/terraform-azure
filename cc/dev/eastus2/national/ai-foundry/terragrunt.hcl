@@ -38,7 +38,7 @@ inputs = {
       }
       sku = {
         name     = "GlobalStandard"
-        capacity = 400
+        capacity = 1
       }
       dynamic_throttling_enabled = false
       rai_policy_name            = local.rai_policy_name
@@ -136,7 +136,7 @@ inputs = {
       }
       sku = {
         name     = "GlobalStandard"
-        capacity = 804
+        capacity = 800
       }
       dynamic_throttling_enabled = false
       rai_policy_name            = local.rai_policy_name
