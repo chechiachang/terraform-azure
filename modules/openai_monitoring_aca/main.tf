@@ -25,13 +25,26 @@ locals {
           valid_status_codes = [200]
         }
       }
+      azure_openai_embedding_check = {
+        prober  = "http"
+        timeout = "10s"
+        http = {
+          method = "POST"
+          headers = {
+            "api-key"      = "__AZURE_OPENAI_API_KEY__"
+            "Content-Type" = "application/json"
+          }
+          body               = "{\"input\":\"ping\"}"
+          valid_status_codes = [200]
+        }
+      }
     }
   })
 
   scrape_config_yaml = yamlencode({
     scrape_configs = [
       {
-        job_name     = "azure_openai_models"
+        job_name     = "azure_openai_chat_models"
         metrics_path = "/probe"
         params = {
           module = ["azure_openai_check"]
@@ -39,6 +52,32 @@ locals {
         static_configs = [
           {
             targets = var.openai_targets
+          }
+        ]
+        relabel_configs = [
+          {
+            source_labels = ["__address__"]
+            target_label  = "__param_target"
+          },
+          {
+            source_labels = ["__param_target"]
+            target_label  = "model_deployment"
+          },
+          {
+            target_label = "__address__"
+            replacement  = "${azurerm_container_app.this.latest_revision_fqdn}:9115"
+          }
+        ]
+      },
+      {
+        job_name     = "azure_openai_embedding_models"
+        metrics_path = "/probe"
+        params = {
+          module = ["azure_openai_embedding_check"]
+        }
+        static_configs = [
+          {
+            targets = var.openai_embedding_targets
           }
         ]
         relabel_configs = [

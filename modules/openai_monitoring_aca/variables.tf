@@ -52,6 +52,16 @@ variable "openai_targets" {
   }
 }
 
+variable "openai_embedding_targets" {
+  type    = list(string)
+  default = []
+
+  validation {
+    condition     = alltrue([for target in var.openai_embedding_targets : can(regex("\\?.*api-version=", target))])
+    error_message = "Each openai embedding target URL must include a pinned api-version query parameter."
+  }
+}
+
 variable "grafana_allowed_cidrs" {
   type = list(string)
 
