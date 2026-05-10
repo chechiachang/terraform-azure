@@ -18,6 +18,8 @@ inputs = {
   resource_group_name            = "cc"
 
   openai_api_key = get_env("AZURE_OPENAI_API_KEY")
+  # Add one target per model deployment defined in:
+  # cc/dev/eastus2/national/ai-foundry/terragrunt.hcl
   openai_targets = [
     "https://national-team.openai.azure.com/openai/deployments/gpt-4o/chat/completions?api-version=2024-05-01-preview"
   ]
