@@ -15,7 +15,7 @@ When generating Terraform code for this agent, ensure the following Azure resour
 
 1. **`azurerm_container_app_environment`**: The managed environment for ACA
 2. **`azurerm_container_app`**
-   - **Image:** `prom/blackbox-exporter:latest`
+   - **Image:** `prom/blackbox-exporter:latest` (or a pinned version tag such as `prom/blackbox-exporter:v0.25.0` for reproducible deployments)
    - **Ingress:** external on port `9115`
    - **Transport:** `http`
    - **Replicas:** `min_replicas = 1`, `max_replicas = 1`
@@ -23,7 +23,8 @@ When generating Terraform code for this agent, ensure the following Azure resour
 
 ## Configuration (Blackbox Module)
 
-The agent should generate a `blackbox.yml` configuration passed as a **Secret** or **Config Map** with the following HTTP `POST` module:
+The agent should generate a `blackbox.yml` configuration passed as a **Secret** or **Config Map** with the following HTTP `POST` module.
+Render the `api-key` value into this file at deploy time (do not rely on runtime environment variable expansion by Blackbox Exporter):
 
 ```yaml
 modules:
