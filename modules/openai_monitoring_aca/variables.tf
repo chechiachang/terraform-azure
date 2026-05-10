@@ -58,7 +58,7 @@ variable "openai_embedding_targets" {
 
   validation {
     condition     = alltrue([for target in var.openai_embedding_targets : can(regex("\\?.*api-version=", target))])
-    error_message = "Each openai embedding target URL must include a pinned api-version query parameter."
+    error_message = "Each OpenAI embedding target URL must include a pinned api-version query parameter."
   }
 }
 
