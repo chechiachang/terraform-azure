@@ -6,7 +6,7 @@ This instruction defines the pattern for deploying a lightweight **Blackbox Expo
 
 - **Service:** Azure Container Apps (ACA)
 - **Workload:** `prom/blackbox-exporter` (Docker)
-- **Goal:** Monitor specific Azure OpenAI model deployments (for example GPT-4o, GPT-3.5) with model-level granularity
+- **Goal:** Monitor specific Azure OpenAI model deployments (e.g., GPT-4o, GPT-3.5) with model-level granularity
 - **Metric Targets:** `probe_success`, `probe_duration_seconds` (external latency)
 
 ## Terraform Resource Requirements
@@ -82,4 +82,4 @@ scrape_configs:
 
 ## How to Use This Agent
 
-Implement a Blackbox Exporter on Azure Container Apps using the `openai-monitoring-aca.md` pattern to monitor a GPT-4o deployment in East US.
+Example request: "Implement a Blackbox Exporter on Azure Container Apps using the `openai-monitoring-aca.md` pattern to monitor my GPT-4o deployment in East US."
