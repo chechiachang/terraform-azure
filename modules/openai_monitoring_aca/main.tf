@@ -102,9 +102,9 @@ resource "azurerm_container_app" "this" {
     }
 
     dynamic "ip_security_restriction" {
-      for_each = var.grafana_allowed_cidrs
+      for_each = { for idx, cidr in var.grafana_allowed_cidrs : idx => cidr }
       content {
-        name             = "allow-${replace(replace(ip_security_restriction.value, ".", "-"), "/", "-")}"
+        name             = "allow-grafana-${ip_security_restriction.key}"
         action           = "Allow"
         ip_address_range = ip_security_restriction.value
       }
