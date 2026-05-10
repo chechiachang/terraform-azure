@@ -21,7 +21,16 @@ inputs = {
   # Add one target per model deployment defined in:
   # cc/dev/eastus2/national/ai-foundry/terragrunt.hcl
   openai_targets = [
-    "https://national-team.openai.azure.com/openai/deployments/gpt-4o/chat/completions?api-version=2024-05-01-preview"
+    "https://national-team.openai.azure.com/openai/deployments/gpt-5.5/chat/completions?api-version=2024-05-01-preview",
+    "https://national-team.openai.azure.com/openai/deployments/text-embedding-3-small/chat/completions?api-version=2024-05-01-preview",
+    "https://national-team.openai.azure.com/openai/deployments/gpt-4.1/chat/completions?api-version=2024-05-01-preview",
+    "https://national-team.openai.azure.com/openai/deployments/gpt-5-mini/chat/completions?api-version=2024-05-01-preview",
+    "https://national-team.openai.azure.com/openai/deployments/gpt-5-nano/chat/completions?api-version=2024-05-01-preview",
+    "https://national-team.openai.azure.com/openai/deployments/gpt-5.1-codex-mini/chat/completions?api-version=2024-05-01-preview",
+    "https://national-team.openai.azure.com/openai/deployments/gpt-5.3-codex/chat/completions?api-version=2024-05-01-preview",
+    "https://national-team.openai.azure.com/openai/deployments/gpt-5.4/chat/completions?api-version=2024-05-01-preview",
+    "https://national-team.openai.azure.com/openai/deployments/gpt-5.4-nano/chat/completions?api-version=2024-05-01-preview",
+    "https://national-team.openai.azure.com/openai/deployments/gpt-5.4-mini/chat/completions?api-version=2024-05-01-preview"
   ]
 
   grafana_allowed_cidrs = local.grafana_allowed_cidrs
