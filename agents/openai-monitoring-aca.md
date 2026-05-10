@@ -15,11 +15,11 @@ When generating Terraform code for this agent, ensure the following Azure resour
 
 1. **`azurerm_container_app_environment`**: The managed environment for ACA
 2. **`azurerm_container_app`**
-   - **Image:** `prom/blackbox-exporter:latest` (or a pinned version tag such as `prom/blackbox-exporter:v0.25.0` for reproducible deployments)
+   - **Image:** use a pinned tag such as `prom/blackbox-exporter:v0.25.0` for reproducible deployments (`:latest` only for short-lived testing)
    - **Ingress:** external on port `9115`
    - **Transport:** `http`
    - **Replicas:** `min_replicas = 1`, `max_replicas = 1`
-3. **`azurerm_container_app_secret`**: To store the `AZURE_OPENAI_API_KEY`
+3. **Container App secret block** (`secret {}` inside `azurerm_container_app`): To store the `AZURE_OPENAI_API_KEY`
 
 ## Configuration (Blackbox Module)
 
@@ -34,7 +34,7 @@ modules:
     http:
       method: POST
       headers:
-        api-key: "${AZURE_OPENAI_API_KEY}"
+        api-key: "REPLACE_WITH_AZURE_OPENAI_API_KEY"
         Content-Type: "application/json"
       body: '{"messages":[{"role":"user","content":"ping"}],"max_tokens":1}'
       valid_status_codes: [200]
