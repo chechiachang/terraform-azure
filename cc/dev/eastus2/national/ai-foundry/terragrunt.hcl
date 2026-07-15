@@ -169,6 +169,48 @@ inputs = {
       dynamic_throttling_enabled = false
       rai_policy_name            = local.rai_policy_name
     }
+    "gpt-5.6-sol" = {
+      name = "gpt-5.6-sol"
+      model = {
+        format = "OpenAI"
+        name   = "gpt-5.6-sol"
+        version = "2026-07-09"
+      }
+      sku = {
+        name     = "GlobalStandard"
+        capacity = 400
+      }
+      dynamic_throttling_enabled = false
+      rai_policy_name            = local.rai_policy_name
+    }
+    "gpt-5.6-luna" = {
+      name = "gpt-5.6-luna"
+      model = {
+        format = "OpenAI"
+        name   = "gpt-5.6-luna"
+        version = "2026-07-09"
+      }
+      sku = {
+        name     = "GlobalStandard"
+        capacity = 400
+      }
+      dynamic_throttling_enabled = false
+      rai_policy_name            = local.rai_policy_name
+    }
+    "gpt-5.6-terra" = {
+      name = "gpt-5.6-terra"
+      model = {
+        format = "OpenAI"
+        name   = "gpt-5.6-terra"
+        version = "2026-07-09"
+      }
+      sku = {
+        name     = "GlobalStandard"
+        capacity = 400
+      }
+      dynamic_throttling_enabled = false
+      rai_policy_name            = local.rai_policy_name
+    }
   }
 
   rai_policies = {
