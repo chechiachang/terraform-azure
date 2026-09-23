@@ -17,7 +17,7 @@ remote_state {
 
 # inputs to manage foundation module
 inputs = {
-  subscription_id = "${get_env("SUBSCRIPTION_ID")}"
+  subscription_id = "${get_env("SUBSCRIPTION_ID", "6fce7237-7e8e-4053-8e7d-ecf8a7c392ce")}"
 }
 
 terraform {

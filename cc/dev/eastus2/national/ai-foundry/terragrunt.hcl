@@ -211,6 +211,38 @@ inputs = {
       dynamic_throttling_enabled = false
       rai_policy_name            = local.rai_policy_name
     }
+    "gpt-6-luna" = {
+      name = "gpt-6-luna"
+      model = {
+        format = "OpenAI"
+        name   = "gpt-6-luna"
+        # Check the Azure OpenAI model catalog when updating model versions:
+        # https://learn.microsoft.com/en-us/azure/ai-foundry/openai/concepts/models#model-summary-table
+        version = "2026-09-22"
+      }
+      sku = {
+        name     = "GlobalStandard"
+        capacity = 10000
+      }
+      dynamic_throttling_enabled = false
+      rai_policy_name            = local.rai_policy_name
+    }
+    "gpt-6-sol" = {
+      name = "gpt-6-sol"
+      model = {
+        format = "OpenAI"
+        name   = "gpt-6-sol"
+        # Check the Azure OpenAI model catalog when updating model versions:
+        # https://learn.microsoft.com/en-us/azure/ai-foundry/openai/concepts/models#model-summary-table
+        version = "2026-09-22"
+      }
+      sku = {
+        name     = "GlobalStandard"
+        capacity = 10000
+      }
+      dynamic_throttling_enabled = false
+      rai_policy_name            = local.rai_policy_name
+    }
   }
 
   rai_policies = {
