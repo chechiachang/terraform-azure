@@ -33,8 +33,6 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: read
-    outputs:
-      final_message: ${{ steps.run_codex.outputs.final-message }}
     steps:
       - uses: actions/checkout@v5
         with:
@@ -74,16 +72,20 @@ jobs:
           model: ${{ vars.CODEX_MODEL || 'gpt-5.5' }}
           permission-profile: ":workspace"
           prompt-file: .github/codex/prompts/update-azure-openai-models.md
+          output-file: ${{ runner.temp }}/codex-pr-body.md
 
       - name: Export changes
         run: |
+          git add -N cc workshop
           git diff -- cc workshop > "$RUNNER_TEMP/codex.patch"
           git diff --stat -- cc workshop
 
       - uses: actions/upload-artifact@v4
         with:
           name: codex-patch
-          path: ${{ runner.temp }}/codex.patch
+          path: |
+            ${{ runner.temp }}/codex.patch
+            ${{ runner.temp }}/codex-pr-body.md
 
   pull_request:
     runs-on: ubuntu-latest
@@ -121,7 +123,4 @@ jobs:
             workshop/**
           commit-message: "feat: add latest Azure OpenAI models"
           title: "feat: add latest Azure OpenAI models"
-          body: |
-            Automated by Codex (`.github/workflows/codex-azure-openai-models.yml`).
-
-            ${{ needs.codex.outputs.final_message }}
+          body-path: ${{ runner.temp }}/codex-pr-body.md
