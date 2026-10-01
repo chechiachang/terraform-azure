@@ -1,0 +1,127 @@
+name: Codex - Update Azure OpenAI models
+
+# Codex coding agent that:
+#   1. Fetches the models supported by the Azure OpenAI resource
+#   2. Checks the OpenAI model deployments configured in this repo
+#   3. Adds the latest models and opens a pull request
+#
+# Required repository secrets:
+#   AZURE_OPENAI_ENDPOINT  e.g. https://<resource>.openai.azure.com (or .cognitiveservices.azure.com)
+#   AZURE_OPENAI_API_KEY   API key of the Azure OpenAI / AI Foundry resource
+#
+# Optional repository variable:
+#   CODEX_MODEL            Azure deployment name used by Codex (default: gpt-5.5)
+#
+# Repository setting required for PR creation:
+#   Settings > Actions > General > "Allow GitHub Actions to create and approve pull requests"
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 2 * * 1" # every Monday 02:00 UTC
+
+permissions:
+  contents: read
+
+concurrency:
+  group: codex-azure-openai-models
+  cancel-in-progress: false
+
+jobs:
+  # Codex runs without a write token; changes are handed over as a patch.
+  codex:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    outputs:
+      final_message: ${{ steps.run_codex.outputs.final-message }}
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          persist-credentials: false
+
+      - name: Fetch Azure OpenAI supported models
+        id: endpoint
+        env:
+          AZURE_OPENAI_ENDPOINT: ${{ secrets.AZURE_OPENAI_ENDPOINT }}
+          AZURE_OPENAI_API_KEY: ${{ secrets.AZURE_OPENAI_API_KEY }}
+        run: |
+          if [ -z "$AZURE_OPENAI_ENDPOINT" ] || [ -z "$AZURE_OPENAI_API_KEY" ]; then
+            echo "::error::Set AZURE_OPENAI_ENDPOINT and AZURE_OPENAI_API_KEY repository secrets."
+            exit 1
+          fi
+
+          endpoint="${AZURE_OPENAI_ENDPOINT%/}"
+          echo "responses=$endpoint/openai/v1/responses" >> "$GITHUB_OUTPUT"
+
+          mkdir -p .codex-tmp
+          curl -fsSL \
+            -H "api-key: $AZURE_OPENAI_API_KEY" \
+            "$endpoint/openai/v1/models" \
+            -o .codex-tmp/azure-openai-models.json
+
+          # Compact list for the agent.
+          jq '[.data[] | {id, created_at, lifecycle_status, deprecation, capabilities}] | sort_by(.id)' \
+            .codex-tmp/azure-openai-models.json > .codex-tmp/azure-openai-models.min.json
+          echo "Fetched $(jq length .codex-tmp/azure-openai-models.min.json) models."
+
+      - name: Run Codex
+        id: run_codex
+        uses: openai/codex-action@v1
+        with:
+          openai-api-key: ${{ secrets.AZURE_OPENAI_API_KEY }}
+          responses-api-endpoint: ${{ steps.endpoint.outputs.responses }}
+          model: ${{ vars.CODEX_MODEL || 'gpt-5.5' }}
+          permission-profile: ":workspace"
+          prompt-file: .github/codex/prompts/update-azure-openai-models.md
+
+      - name: Export changes
+        run: |
+          git diff -- cc workshop > "$RUNNER_TEMP/codex.patch"
+          git diff --stat -- cc workshop
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: codex-patch
+          path: ${{ runner.temp }}/codex.patch
+
+  pull_request:
+    runs-on: ubuntu-latest
+    needs: codex
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: actions/download-artifact@v4
+        with:
+          name: codex-patch
+          path: ${{ runner.temp }}
+
+      - name: Apply Codex patch
+        id: apply
+        run: |
+          if [ -s "$RUNNER_TEMP/codex.patch" ]; then
+            git apply "$RUNNER_TEMP/codex.patch"
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "Codex made no changes."
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Create pull request
+        if: steps.apply.outputs.changed == 'true'
+        uses: peter-evans/create-pull-request@v7
+        with:
+          branch: codex/update-azure-openai-models
+          delete-branch: true
+          add-paths: |
+            cc/**
+            workshop/**
+          commit-message: "feat: add latest Azure OpenAI models"
+          title: "feat: add latest Azure OpenAI models"
+          body: |
+            Automated by Codex (`.github/workflows/codex-azure-openai-models.yml`).
+
+            ${{ needs.codex.outputs.final_message }}

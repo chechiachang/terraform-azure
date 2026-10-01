@@ -77,3 +77,16 @@ az storage container create \
   --name ${CONTAINER_NAME} \
   --auth-mode login
 ```
+
+# Codex Agent: Azure OpenAI Model Updates
+
+Workflow: `.github/workflows/codex-azure-openai-models.yml` (manual or weekly).
+
+1. Fetches models supported by Azure OpenAI (`GET <endpoint>/openai/v1/models`).
+2. Codex checks deployed models in `ai-foundry` stacks.
+3. Codex adds the latest models and opens a PR.
+
+Setup:
+- Secrets: `AZURE_OPENAI_ENDPOINT` (e.g. `https://<resource>.openai.azure.com`), `AZURE_OPENAI_API_KEY`.
+- Optional variable: `CODEX_MODEL` (Azure deployment used by Codex, default `gpt-5.5`).
+- Enable Settings > Actions > General > "Allow GitHub Actions to create and approve pull requests".

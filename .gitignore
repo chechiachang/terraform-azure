@@ -34,3 +34,6 @@ override.tf.json
 
 # asdf
 **/.tool-versions
+
+# Codex agent scratch files
+.codex-tmp/
