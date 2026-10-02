@@ -243,6 +243,34 @@ inputs = {
       dynamic_throttling_enabled = false
       rai_policy_name            = local.rai_policy_name
     }
+    "gpt-6-astra" = {
+      name = "gpt-6-astra"
+      model = {
+        format  = "OpenAI"
+        name    = "gpt-6-astra"
+        version = "2026-09-03"
+      }
+      sku = {
+        name     = "GlobalStandard"
+        capacity = 10000
+      }
+      dynamic_throttling_enabled = false
+      rai_policy_name            = local.rai_policy_name
+    }
+    "gpt-6.1-sol" = {
+      name = "gpt-6.1-sol"
+      model = {
+        format  = "OpenAI"
+        name    = "gpt-6.1-sol"
+        version = "2026-09-29"
+      }
+      sku = {
+        name     = "GlobalStandard"
+        capacity = 10000
+      }
+      dynamic_throttling_enabled = false
+      rai_policy_name            = local.rai_policy_name
+    }
   }
 
   rai_policies = {
