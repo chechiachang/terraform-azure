@@ -28,6 +28,8 @@ inputs = {
   project_management_enabled = true
   projects                   = {}
 
+  # Keep model deployments here aligned with monitoring targets in:
+  # cc/dev/eastus2/national/openai-monitoring-aca/terragrunt.hcl
   cognitive_deployments = {
     "gpt-5.5" = {
       name = "gpt-5.5"
