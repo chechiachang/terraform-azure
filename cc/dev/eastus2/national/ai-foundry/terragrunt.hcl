@@ -271,6 +271,25 @@ inputs = {
       dynamic_throttling_enabled = false
       rai_policy_name            = local.rai_policy_name
     }
+    # Microsoft Decision API model
+    # Client applications must call the Decision API endpoint:
+    # <foundry-resource-endpoint>/providers/microsoft/v1/systemone
+    # with the deployment name "microsoft-decision-1"
+    # See: https://learn.microsoft.com/en-us/azure/foundry/foundry-models/how-to/use-foundry-models-microsoft-decision
+    "microsoft-decision-1" = {
+      name = "microsoft-decision-1"
+      model = {
+        format  = "Microsoft"
+        name    = "Microsoft-Decision-1"
+        version = "1"
+      }
+      sku = {
+        name     = "GlobalStandard"
+        capacity = 1
+      }
+      dynamic_throttling_enabled = false
+      rai_policy_name            = local.rai_policy_name
+    }
   }
 
   rai_policies = {
