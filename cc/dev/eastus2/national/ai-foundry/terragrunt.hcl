@@ -276,16 +276,16 @@ inputs = {
     # <foundry-resource-endpoint>/providers/microsoft/v1/systemone
     # with the deployment name "microsoft-decision-1"
     # See: https://learn.microsoft.com/en-us/azure/foundry/foundry-models/how-to/use-foundry-models-microsoft-decision
-    "microsoft-decision-1" = {
-      name = "microsoft-decision-1"
+    "decision-1" = {
+      name = "decision-1"
       model = {
         format  = "Microsoft"
         name    = "Microsoft-Decision-1"
         version = "1"
       }
       sku = {
-        name     = "GlobalStandard"
-        capacity = 1
+        name     = "DataZoneStandard"
+        capacity = 500
       }
       dynamic_throttling_enabled = false
       rai_policy_name            = local.rai_policy_name
