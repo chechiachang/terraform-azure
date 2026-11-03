@@ -47,15 +47,15 @@ inputs = {
       dynamic_throttling_enabled = false
       rai_policy_name            = local.rai_policy_name
     }
-    # Call <foundry-resource-endpoint>/providers/microsoft/v1/systemone
-    # with request model "decision-1" (the deployment name).
-    # https://learn.microsoft.com/en-us/azure/foundry/foundry-models/how-to/use-foundry-models-microsoft-decision
-    "decision-1" = {
-      name = "decision-1"
+    # Azure OpenAI Decisions API: POST /openai/v1/decisions.
+    # It currently supports gpt-6-luna only; pass this deployment name as model.
+    # https://learn.microsoft.com/en-us/azure/foundry/openai/how-to/decisions
+    "gpt-6-luna" = {
+      name = "gpt-6-luna"
       model = {
-        format  = "Microsoft"
-        name    = "Microsoft-Decision-1"
-        version = "1"
+        format  = "OpenAI"
+        name    = "gpt-6-luna"
+        version = "2026-09-22"
       }
       sku = {
         name     = "DataZoneStandard"
