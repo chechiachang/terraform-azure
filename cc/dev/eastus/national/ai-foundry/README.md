@@ -6,11 +6,11 @@ This is an **additive, review-only regional stack** proposed in [issue #22](http
 
 | Deployment | Model version | SKU | Capacity |
 | --- | --- | --- | --- |
-| `gpt-6.1-terra` | `2026-10-26` | `DataZoneStandard` | `400` |
-| `gpt-6.1-sol` | `2026-09-29` | `DataZoneStandard` | `400` |
-| `gpt-6-luna` | `2026-09-22` | `DataZoneStandard` | `400` |
+| `gpt-6.1-terra` | `2026-10-26` | `DataZoneStandard` | `10000` |
+| `gpt-6.1-sol` | `2026-09-29` | `DataZoneStandard` | `10000` |
+| `gpt-6-luna` | `2026-09-22` | `DataZoneStandard` | `10000` |
 
-Capacity `400` matches the most common setting in `cc/dev/eastus2/national/ai-foundry`; it does not copy that stack's GPT-6-family capacity `10000` or its `GlobalStandard` SKU. Actual quota and capacity availability must be checked for each model and deployment type in East US before applying.
+Capacity `10000` aligns with the GPT-6-family setting in `cc/dev/eastus2/national/ai-foundry`, including its GPT-6 Luna and GPT-6.1 Sol deployments. This stack retains its existing `DataZoneStandard` SKU rather than changing to `GlobalStandard`. Quota is model-, region-, and deployment-type-specific: East US 2 Global Standard quota does not establish East US Data Zone Standard quota. Confirm sufficient quota and available capacity for all three deployments before applying; setting capacity does not obtain quota or reserve compute.
 
 Microsoft's region matrix lists all three model versions for `DataZoneStandard` in East US (checked November 12, 2026). `DataZoneStandard` keeps inference within the US data zone; it does not promise the lowest latency.
 
