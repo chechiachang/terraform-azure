@@ -44,6 +44,9 @@ resource "azurerm_cognitive_account_rai_policy" "this" {
 resource "azurerm_cognitive_deployment" "this" {
   for_each = var.cognitive_deployments
 
+  # Policy names are plain strings, so Terraform cannot infer this dependency.
+  depends_on = [azurerm_cognitive_account_rai_policy.this]
+
   name                       = each.value.name
   cognitive_account_id       = azurerm_cognitive_account.this.id
   rai_policy_name            = try(each.value.rai_policy_name, null)
