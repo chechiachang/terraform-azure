@@ -30,6 +30,7 @@ inputs = {
 
   # Parallel region proposal; do not replace or move the East US 2 stack/state.
   # Confirm model availability, account naming, quota, and rollout before applying.
+  # Capacity 10000 aligns with the East US 2 GPT-6 family; retain the US data-zone SKU.
   # https://learn.microsoft.com/en-us/azure/foundry/foundry-models/concepts/models-sold-directly-by-azure-region-availability
   cognitive_deployments = {
     "gpt-6.1-terra" = {
@@ -41,7 +42,21 @@ inputs = {
       }
       sku = {
         name     = "DataZoneStandard"
-        capacity = 100
+        capacity = 10000
+      }
+      dynamic_throttling_enabled = false
+      rai_policy_name            = local.rai_policy_name
+    }
+    "gpt-6.1-sol" = {
+      name = "gpt-6.1-sol"
+      model = {
+        format  = "OpenAI"
+        name    = "gpt-6.1-sol"
+        version = "2026-09-29"
+      }
+      sku = {
+        name     = "DataZoneStandard"
+        capacity = 10000
       }
       dynamic_throttling_enabled = false
       rai_policy_name            = local.rai_policy_name
@@ -58,7 +73,7 @@ inputs = {
       }
       sku = {
         name     = "DataZoneStandard"
-        capacity = 100
+        capacity = 10000
       }
       dynamic_throttling_enabled = false
       rai_policy_name            = local.rai_policy_name
