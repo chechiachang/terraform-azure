@@ -2,7 +2,7 @@ terraform {
   source = "${get_repo_root()}/modules/ai_foundry"
 }
 
-include {
+include "root" {
   path = find_in_parent_folders()
 }
 
@@ -30,7 +30,6 @@ inputs = {
 
   # Parallel region proposal; do not replace or move the East US 2 stack/state.
   # Confirm model availability, account naming, quota, and rollout before applying.
-  # Capacity 1 is a conservative validation starting point, not a throughput target.
   # https://learn.microsoft.com/en-us/azure/foundry/foundry-models/concepts/models-sold-directly-by-azure-region-availability
   cognitive_deployments = {
     "gpt-6.1-terra" = {
@@ -42,7 +41,7 @@ inputs = {
       }
       sku = {
         name     = "DataZoneStandard"
-        capacity = 1
+        capacity = 100
       }
       dynamic_throttling_enabled = false
       rai_policy_name            = local.rai_policy_name
@@ -59,7 +58,7 @@ inputs = {
       }
       sku = {
         name     = "DataZoneStandard"
-        capacity = 1
+        capacity = 100
       }
       dynamic_throttling_enabled = false
       rai_policy_name            = local.rai_policy_name

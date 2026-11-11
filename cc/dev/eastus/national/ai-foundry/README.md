@@ -7,7 +7,7 @@ This is an **additive, review-only regional stack** proposed in [issue #22](http
 - `gpt-6.1-terra`, model version `2026-10-26`, `DataZoneStandard`
 - `gpt-6-luna`, model version `2026-09-22`, `DataZoneStandard`; this is the currently supported model for the **Azure OpenAI Decisions API**. Call `POST /openai/v1/decisions` and pass the deployment name `gpt-6-luna` as `model`. GPT-6.1 Terra is not currently documented as a Decisions API model.
 
-Microsoft's region matrix lists both deployments in East US. The Azure OpenAI Decisions API rollout explicitly excludes East US 2, so adding the API feature requires an eligible region and a `gpt-6-luna` deployment. `DataZoneStandard` keeps inference within the US data zone; it does not promise the lowest latency. The initial capacity of `1` is only a conservative validation setting, not a production throughput recommendation.
+Microsoft's region matrix lists both deployments in East US. The Azure OpenAI Decisions API rollout explicitly excludes East US 2, so adding the API feature requires an eligible region and a `gpt-6-luna` deployment. `DataZoneStandard` keeps inference within the US data zone; it does not promise the lowest latency. Both deployments use capacity `100`.
 
 - [Azure OpenAI Decisions API: supported model, endpoint, and regional rollout](https://learn.microsoft.com/en-us/azure/foundry/openai/how-to/decisions)
 - [OpenAI Decisions API guide](https://developers.openai.com/api/docs/guides/decisions)
