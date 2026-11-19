@@ -6,7 +6,7 @@ locals {
         Name        = var.name
         Environment = var.environment
         Project     = var.project
-      } : k => v if v != null && trim(v) != ""
+      } : k => v if v == null ? false : trimspace(v) != ""
     }
   )
 
@@ -16,7 +16,8 @@ locals {
         prober  = "http"
         timeout = "10s"
         http = {
-          method = "POST"
+          method           = "POST"
+          follow_redirects = false
           headers = {
             "api-key"      = "__AZURE_OPENAI_API_KEY__"
             "Content-Type" = "application/json"
@@ -29,7 +30,8 @@ locals {
         prober  = "http"
         timeout = "10s"
         http = {
-          method = "POST"
+          method           = "POST"
+          follow_redirects = false
           headers = {
             "api-key"      = "__AZURE_OPENAI_API_KEY__"
             "Content-Type" = "application/json"
