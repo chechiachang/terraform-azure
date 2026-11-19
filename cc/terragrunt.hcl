@@ -1,3 +1,8 @@
+locals {
+  subscription_id = get_env("ARM_SUBSCRIPTION_ID", get_env("SUBSCRIPTION_ID", "6fce7237-7e8e-4053-8e7d-ecf8a7c392ce"))
+  azure_cli_bin   = get_env("AZURE_CLI_BIN_DIR", "${get_env("HOME")}/codex/azure-cli-venv/bin")
+}
+
 # state to use existing resources in foundation
 remote_state {
   backend = "azurerm"
@@ -8,6 +13,7 @@ remote_state {
   }
 
   config = {
+    subscription_id      = local.subscription_id
     resource_group_name  = "cc"
     storage_account_name = "tfstate3153986756286"
     container_name       = "tfstate"
@@ -17,10 +23,18 @@ remote_state {
 
 # inputs to manage foundation module
 inputs = {
-  subscription_id = "${get_env("SUBSCRIPTION_ID")}"
+  subscription_id = local.subscription_id
 }
 
 terraform {
+  extra_arguments "azure_identity" {
+    commands = ["init", "validate", "plan", "apply", "destroy", "refresh", "import", "output", "show", "providers"]
+    env_vars = {
+      ARM_SUBSCRIPTION_ID = local.subscription_id
+      PATH                = "${local.azure_cli_bin}:${get_env("PATH")}"
+    }
+  }
+
   extra_arguments "env" {
     commands = get_terraform_commands_that_need_vars()
     required_var_files = [

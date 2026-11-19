@@ -40,7 +40,7 @@ inputs = {
       }
       sku = {
         name     = "GlobalStandard"
-        capacity = 400
+        capacity = 1
       }
       dynamic_throttling_enabled = false
       rai_policy_name            = local.rai_policy_name
@@ -138,7 +138,7 @@ inputs = {
       }
       sku = {
         name     = "GlobalStandard"
-        capacity = 804
+        capacity = 1
       }
       dynamic_throttling_enabled = false
       rai_policy_name            = local.rai_policy_name
@@ -167,6 +167,127 @@ inputs = {
       sku = {
         name     = "GlobalStandard"
         capacity = 400
+      }
+      dynamic_throttling_enabled = false
+      rai_policy_name            = local.rai_policy_name
+    }
+    "gpt-5.6-sol" = {
+      name = "gpt-5.6-sol"
+      model = {
+        format = "OpenAI"
+        name   = "gpt-5.6-sol"
+        version = "2026-07-09"
+      }
+      sku = {
+        name     = "GlobalStandard"
+        capacity = 400
+      }
+      dynamic_throttling_enabled = false
+      rai_policy_name            = local.rai_policy_name
+    }
+    "gpt-5.6-luna" = {
+      name = "gpt-5.6-luna"
+      model = {
+        format = "OpenAI"
+        name   = "gpt-5.6-luna"
+        version = "2026-07-09"
+      }
+      sku = {
+        name     = "GlobalStandard"
+        capacity = 400
+      }
+      dynamic_throttling_enabled = false
+      rai_policy_name            = local.rai_policy_name
+    }
+    "gpt-5.6-terra" = {
+      name = "gpt-5.6-terra"
+      model = {
+        format = "OpenAI"
+        name   = "gpt-5.6-terra"
+        version = "2026-07-09"
+      }
+      sku = {
+        name     = "GlobalStandard"
+        capacity = 400
+      }
+      dynamic_throttling_enabled = false
+      rai_policy_name            = local.rai_policy_name
+    }
+    "gpt-6-luna" = {
+      name = "gpt-6-luna"
+      model = {
+        format = "OpenAI"
+        name   = "gpt-6-luna"
+        # Check the Azure OpenAI model catalog when updating model versions:
+        # https://learn.microsoft.com/en-us/azure/ai-foundry/openai/concepts/models#model-summary-table
+        version = "2026-09-22"
+      }
+      sku = {
+        name     = "GlobalStandard"
+        capacity = 10000
+      }
+      dynamic_throttling_enabled = false
+      rai_policy_name            = local.rai_policy_name
+    }
+    "gpt-6-sol" = {
+      name = "gpt-6-sol"
+      model = {
+        format = "OpenAI"
+        name   = "gpt-6-sol"
+        # Check the Azure OpenAI model catalog when updating model versions:
+        # https://learn.microsoft.com/en-us/azure/ai-foundry/openai/concepts/models#model-summary-table
+        version = "2026-09-22"
+      }
+      sku = {
+        name     = "GlobalStandard"
+        capacity = 10000
+      }
+      dynamic_throttling_enabled = false
+      rai_policy_name            = local.rai_policy_name
+    }
+    "gpt-6-astra" = {
+      name = "gpt-6-astra"
+      model = {
+        format  = "OpenAI"
+        name    = "gpt-6-astra"
+        version = "2026-09-03"
+      }
+      sku = {
+        name     = "GlobalStandard"
+        capacity = 10000
+      }
+      dynamic_throttling_enabled = false
+      rai_policy_name            = local.rai_policy_name
+    }
+    "gpt-6.1-sol" = {
+      name = "gpt-6.1-sol"
+      model = {
+        format  = "OpenAI"
+        name    = "gpt-6.1-sol"
+        version = "2026-09-29"
+      }
+      sku = {
+        name     = "GlobalStandard"
+        capacity = 10000
+      }
+      dynamic_throttling_enabled = false
+      rai_policy_name            = local.rai_policy_name
+    }
+    # Microsoft Decision API model
+    # Client applications must call the Decision API endpoint:
+    # <foundry-resource-endpoint>/providers/microsoft/v1/systemone
+    # with the deployment name "microsoft-decision-1"
+    # See: https://learn.microsoft.com/en-us/azure/foundry/foundry-models/how-to/use-foundry-models-microsoft-decision
+    "decision-1" = {
+      name = "decision-1"
+      model = {
+        format  = "Microsoft"
+        name    = "Microsoft-Decision-1"
+        version = "1"
+      }
+      sku = {
+        name     = "DataZoneStandard"
+        capacity = 500
       }
       dynamic_throttling_enabled = false
       rai_policy_name            = local.rai_policy_name
