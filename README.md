@@ -37,19 +37,19 @@ cd cc/g/tenant/login_users
 cd cc/g/tenant/verified_domains
 ```
 
-Set required environment variables:
+For `cc` stacks, the shared Terragrunt config supplies the subscription and Azure CLI path; no manual exports are needed. Authenticate only when the CLI session is missing or expired:
 ```bash
 az login --use-device-code # complete login in a browser on another device
-az account set --subscription="SUBSCRIPTION_ID"
-export SUBSCRIPTION_ID="SUBSCRIPTION_ID"
-export ARM_SUBSCRIPTION_ID="$SUBSCRIPTION_ID" # provider and state backend
+az account set --subscription="6fce7237-7e8e-4053-8e7d-ecf8a7c392ce"
 ```
+
+On the OCI agent host, Azure CLI is `~/codex/azure-cli-venv/bin/az`. Override `AZURE_CLI_BIN_DIR` for another installation. `ARM_SUBSCRIPTION_ID` (then `SUBSCRIPTION_ID`) overrides the `cc` subscription; workshop/legacy stacks still require explicit subscription configuration. Existing initialized `cc` stacks need a one-time `terragrunt run -- init -reconfigure` after this backend configuration update; state location is unchanged.
 
 Run Terragrunt:
 ```bash
-terragrunt init
-terragrunt plan
-terragrunt apply
+terragrunt run -- init
+terragrunt run -- plan
+terragrunt run -- apply
 ```
 
 # First-time Backend Setup
