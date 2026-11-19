@@ -39,9 +39,10 @@ cd cc/g/tenant/verified_domains
 
 Set required environment variables:
 ```bash
-az login
+az login --use-device-code # complete login in a browser on another device
 az account set --subscription="SUBSCRIPTION_ID"
 export SUBSCRIPTION_ID="SUBSCRIPTION_ID"
+export ARM_SUBSCRIPTION_ID="$SUBSCRIPTION_ID" # provider and state backend
 ```
 
 Run Terragrunt:

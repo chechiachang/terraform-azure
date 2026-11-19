@@ -2,7 +2,7 @@ terraform {
   source = "git::https://github.com/Azure/terraform-azurerm-avm-res-storage-storageaccount.git//?ref=v0.5.0"
 }
 
-include {
+include "root" {
   path = find_in_parent_folders()
 }
 
@@ -20,7 +20,10 @@ inputs = {
   network_rules = {
     default_action = "Deny"
     ip_rules = [
-      "59.125.102.45", # office
+      "59.125.102.45",   # office
+      "218.172.104.229", # existing live allowlist entry
+      "36.229.214.108",  # existing live allowlist entry
+      "161.33.23.63",    # OCI Osaka agent NAT egress; changes if gateway is replaced
     ]
     virtual_network_subnet_ids = []
   }
